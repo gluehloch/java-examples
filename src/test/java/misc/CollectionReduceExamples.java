@@ -17,6 +17,31 @@ import org.junit.Test;
 public class CollectionReduceExamples {
 
     @Test
+    public void sumUpCollectionElements() {
+        assertThat(Arrays.asList(10, 20, 30).stream()
+                .reduce((result, element) -> result + element).get())
+                        .isEqualTo(60);
+        assertThat(Arrays.asList(10).stream()
+                .reduce((result, element) -> result + element).get())
+                        .isEqualTo(10);
+
+        assertThat(Arrays.asList(10, 20, 30).stream()
+                .reduce((result, element) -> result + element + 1).get())
+                        .isEqualTo(62);
+        assertThat(Arrays.asList(10).stream()
+                .reduce((result, element) -> result + element + 1).get())
+                        .isEqualTo(10);
+
+        // Here comes the additional 'identity' parameter.
+        assertThat(Arrays.asList(10, 20, 30).stream().reduce(0,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(63);
+        assertThat(Arrays.asList(10).stream().reduce(0,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(11);
+    }
+
+    @Test
     public void sumUpAllCollectionElements() {
         List<Integer> integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
@@ -60,21 +85,21 @@ public class CollectionReduceExamples {
         summe = integers.stream()
                 .reduce((result, element) -> result + 4711 + element).get();
         assertThat(summe).isEqualTo(100);
-        
+
         summe = integers.stream()
                 .reduce(0, (result, element) -> result + 4711 + element);
         assertThat(summe).isEqualTo(4811);
-        
+
         integers = Arrays.asList(100, 200);
         summe = integers.stream()
                 .reduce((result, element) -> result + 4711 + element).get();
         assertThat(summe).isEqualTo(5011);
-        
+
         integers = Arrays.asList(100);
         summe = integers.stream()
                 .reduce(new MyBinaryOperator(100)).get();
         assertThat(summe).isEqualTo(100);
-        
+
         integers = Arrays.asList(100);
         summe = integers.stream()
                 .reduce(0, new MyBinaryOperator(200));
@@ -97,7 +122,6 @@ public class CollectionReduceExamples {
         System.out.printf("Summe: %1$d%n", sum);
     }
 
-    
     private class MyBinaryOperator implements BinaryOperator<Integer> {
         private int addme;
 
@@ -108,7 +132,7 @@ public class CollectionReduceExamples {
         @Override
         public Integer apply(Integer t, Integer u) {
             return Integer.sum(t + addme, u);
-        }        
+        }
     }
 
 }
