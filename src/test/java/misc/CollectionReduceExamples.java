@@ -59,22 +59,22 @@ public class CollectionReduceExamples {
 
         summe = integers.stream()
                 .reduce((result, element) -> result + 4711 + element).get();
-        assertThat(summe).isEqualTo(100);
-        
+        assertThat(summe).isEqualTo(100); // Und nicht: 100 + 4711!
+
         summe = integers.stream()
                 .reduce(0, (result, element) -> result + 4711 + element);
-        assertThat(summe).isEqualTo(4811);
-        
+        assertThat(summe).isEqualTo(4811); // Jetzt aber: 100 + 4711!
+
         integers = Arrays.asList(100, 200);
         summe = integers.stream()
                 .reduce((result, element) -> result + 4711 + element).get();
         assertThat(summe).isEqualTo(5011);
-        
+
         integers = Arrays.asList(100);
         summe = integers.stream()
                 .reduce(new MyBinaryOperator(100)).get();
         assertThat(summe).isEqualTo(100);
-        
+
         integers = Arrays.asList(100);
         summe = integers.stream()
                 .reduce(0, new MyBinaryOperator(200));
@@ -84,6 +84,16 @@ public class CollectionReduceExamples {
         summe = integers.stream()
                 .reduce(new MyBinaryOperator(100)).get();
         assertThat(summe).isEqualTo(400);
+    }
+
+    @Test
+    public void sumUpStringLength() {
+        List<String> strings = Arrays.asList("Andre", "Christine", "Adam",
+                "Lars", "Erwin");
+        assertThat(strings.stream().reduce(0,
+                (Integer sum, String string) -> string.length(),
+                (Integer sum1, Integer sum2) -> sum1 + sum2)).isEqualTo(23);
+        
     }
 
     @Test
@@ -97,7 +107,6 @@ public class CollectionReduceExamples {
         System.out.printf("Summe: %1$d%n", sum);
     }
 
-    
     private class MyBinaryOperator implements BinaryOperator<Integer> {
         private int addme;
 
@@ -108,7 +117,7 @@ public class CollectionReduceExamples {
         @Override
         public Integer apply(Integer t, Integer u) {
             return Integer.sum(t + addme, u);
-        }        
+        }
     }
 
 }
