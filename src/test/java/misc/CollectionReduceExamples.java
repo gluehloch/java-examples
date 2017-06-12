@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
 import org.junit.Test;
@@ -15,6 +16,47 @@ import org.junit.Test;
  * @since 2017
  */
 public class CollectionReduceExamples {
+
+    @Test
+    public void sumUpCollectionElements() {
+        assertThat(Arrays.asList(10, 20, 30).stream()
+                .reduce((result, element) -> result + element).get())
+                        .isEqualTo(60);
+        assertThat(Arrays.asList(10).stream()
+                .reduce((result, element) -> result + element).get())
+                        .isEqualTo(10);
+
+        assertThat(Arrays.asList(10, 20, 30).stream()
+                .reduce((result, element) -> result + element + 1).get())
+                        .isEqualTo(62);
+        assertThat(Arrays.asList(10).stream()
+                .reduce((result, element) -> result + element + 1).get())
+                        .isEqualTo(10);
+
+        // Here comes the additional 'identity' parameter.
+        assertThat(Arrays.asList(10, 20, 30).stream().reduce(0,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(63);
+        assertThat(Arrays.asList(10).stream().reduce(0,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(11);
+
+        Integer identity = 0;
+        BiFunction<Integer, Integer, Integer> accumulator = new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer t, Integer u) {
+                return t + u;
+            }
+        };
+        BinaryOperator<Integer> combiner = new BinaryOperator<Integer>() {
+            @Override
+            public Integer apply(Integer t, Integer u) {
+                return t + u;
+            }
+        };
+        Arrays.asList(10, 20, 30).stream().reduce(identity, accumulator,
+                combiner);
+    }
 
     @Test
     public void sumUpAllCollectionElements() {
@@ -59,11 +101,14 @@ public class CollectionReduceExamples {
 
         summe = integers.stream()
                 .reduce((result, element) -> result + 4711 + element).get();
+
         assertThat(summe).isEqualTo(100); // Und nicht: 100 + 4711!
+        assertThat(summe).isEqualTo(100);
 
         summe = integers.stream()
                 .reduce(0, (result, element) -> result + 4711 + element);
         assertThat(summe).isEqualTo(4811); // Jetzt aber: 100 + 4711!
+        assertThat(summe).isEqualTo(4811);
 
         integers = Arrays.asList(100, 200);
         summe = integers.stream()
@@ -92,8 +137,9 @@ public class CollectionReduceExamples {
                 "Lars", "Erwin");
         assertThat(strings.stream().reduce(0,
                 (Integer sum, String string) -> string.length(),
-                (Integer sum1, Integer sum2) -> sum1.intValue() + sum2.intValue())).isEqualTo(23);
-        
+                (Integer sum1, Integer sum2) -> sum1.intValue()
+                        + sum2.intValue())).isEqualTo(23);
+
     }
 
     @Test
