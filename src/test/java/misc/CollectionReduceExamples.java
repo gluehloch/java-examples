@@ -92,7 +92,7 @@ public class CollectionReduceExamples {
                 "Lars", "Erwin");
         assertThat(strings.stream().reduce(0,
                 (Integer sum, String string) -> string.length(),
-                (Integer sum1, Integer sum2) -> sum1 + sum2)).isEqualTo(23);
+                (Integer sum1, Integer sum2) -> sum1.intValue() + sum2.intValue())).isEqualTo(23);
         
     }
 
