@@ -140,23 +140,19 @@ public class CollectionReduceExamples {
 
     @Test
     public void sumUpStringLength() {
-        List<String> strings = Arrays.asList("Andre", "Christine", "Adam",
-                "Lars", "Erwin");
-        
-        // Warum???
-        assertThat(strings.stream().reduce(0,
-                (Integer sum, String string) -> string.length(),
-                (Integer sum1, Integer sum2) -> sum1 + sum2)).isEqualTo(5);
+        List<String> strings = null;
 
-        // Sollte doch eigentlich ...
+        strings = Arrays.asList("Andre", "Christine", "Adam", "Lars", "Erwin");
+
         assertThat(strings.stream().reduce(0,
                 (sum, string) -> sum + string.length(),
-                (sum1, sum2) -> sum1 + sum2)).isEqualTo(23);
+                (sum1, sum2) -> sum1 + sum2)).isEqualTo(27);
 
         strings = Arrays.asList("Andre", "Christine", "Adam", "Lars", "Erwin");
         assertThat(strings.stream().reduce(0,
                 (Integer sum, String string) -> sum + string.length(),
-                (Integer sum1, Integer sum2) -> sum1 + sum2).intValue()).isEqualTo(27);
+                (Integer sum1, Integer sum2) -> sum1 + sum2).intValue())
+                        .isEqualTo(27);
     }
 
     @Test
