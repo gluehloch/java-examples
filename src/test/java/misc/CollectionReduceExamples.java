@@ -2,6 +2,7 @@ package misc;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -40,6 +41,12 @@ public class CollectionReduceExamples {
         assertThat(Arrays.asList(10).stream().reduce(0,
                 (result, element) -> result + element + 1))
                         .isEqualTo(11);
+        assertThat(Arrays.asList(10).stream().reduce(1,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(12);
+        assertThat(new ArrayList<Integer>().stream().reduce(0,
+                (result, element) -> result + element + 1))
+                        .isEqualTo(0);
 
         Integer identity = 0;
         BiFunction<Integer, Integer, Integer> accumulator = new BiFunction<Integer, Integer, Integer>() {
@@ -135,9 +142,16 @@ public class CollectionReduceExamples {
     public void sumUpStringLength() {
         List<String> strings = Arrays.asList("Andre", "Christine", "Adam",
                 "Lars", "Erwin");
+        
+        // Warum???
         assertThat(strings.stream().reduce(0,
                 (Integer sum, String string) -> string.length(),
-                (Integer sum1, Integer sum2) -> sum1 + sum2)).isEqualTo(23);
+                (Integer sum1, Integer sum2) -> sum1 + sum2)).isEqualTo(5);
+
+        // Sollte doch eigentlich ...
+        assertThat(strings.stream().reduce(0,
+                (sum, string) -> sum + string.length(),
+                (sum1, sum2) -> sum1 + sum2)).isEqualTo(23);
 
         strings = Arrays.asList("Andre", "Christine", "Adam", "Lars", "Erwin");
         assertThat(strings.stream().reduce(0,
