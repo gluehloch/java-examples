@@ -11,7 +11,6 @@ import java.util.List;
 public class CollectionExamples {
 
     public void examples() {
-        // oder mit Java 9
         var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         integers2.sort((a, b) -> a.compareTo(b));
     }
