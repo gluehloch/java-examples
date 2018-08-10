@@ -67,7 +67,7 @@ public class CollectionReduceExamples {
 
     @Test
     public void sumUpAllCollectionElements() {
-        List<Integer> integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        var integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int sum = integers.stream()
                 .reduce((Integer result, Integer element) -> {
@@ -80,7 +80,7 @@ public class CollectionReduceExamples {
 
     @Test
     public void sumUpAllCollectionElements2() {
-        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        var integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         int sum = integers.stream()
                 .reduce((Integer result, Integer element) -> {
@@ -157,7 +157,7 @@ public class CollectionReduceExamples {
 
     @Test
     public void sumUpAllCollectionElementsAsOneLiner() {
-        List<Integer> integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        var integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int sum = integers.stream()
                 .reduce((result, element) -> result + element).get();
