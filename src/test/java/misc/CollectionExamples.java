@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some new Java 9 / 10 features.
@@ -36,12 +37,11 @@ public class CollectionExamples {
 		System.out.println(map3);
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void sortCollections() {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-		// Sortierung einer unveraenderlichen List fuehrt zu einer ...
-		integers2.sort((a, b) -> a.compareTo(b));
+		Assertions.assertThrows(UnsupportedOperationException.class, () -> integers2.sort((a, b) -> a.compareTo(b)));
 	}
 
 	/**
