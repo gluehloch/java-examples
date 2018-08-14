@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.awtools</groupId>
-	<artifactId>java8-examples</artifactId>
+	<artifactId>java-examples</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
