@@ -1,11 +1,13 @@
 package misc;
 
 import static java.util.Map.entry;
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,6 @@ public class CollectionExamples {
 
 	@Test
 	public void createCollections() {
-		// #of() wurde mit Java 9 eingefuehrt
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 		System.out.println(integers2);
 
@@ -42,6 +43,17 @@ public class CollectionExamples {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 		Assertions.assertThrows(UnsupportedOperationException.class, () -> integers2.sort((a, b) -> a.compareTo(b)));
+	}
+
+	@Test
+	public void toMap() {
+		var integers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		Map<Integer, Integer> map = integers.stream().collect(Collectors.toMap(i -> i, j -> j * 2));
+		assertThat(map).hasSize(10);
+
+		for (int i = 1; i <= 10; i++) {
+			assertThat(map.get(i)).isEqualTo(i * 2);
+		}
 	}
 
 	/**
