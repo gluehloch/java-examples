@@ -1,9 +1,12 @@
 package misc;
 
 import static java.util.Map.entry;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +42,23 @@ public class CollectionExamples {
 	}
 
 	@Test
+	public void sortCollections2() {
+	    var list = new ArrayList<String>();
+	    list.add("1234567");
+	    list.add("12345");
+	    list.add("123");
+	    list.add("12");
+	    list.add("1");
+	    Collections.sort(list, Comparator.comparingInt(String::length));
+	    
+	    assertThat(list.get(0)).isEqualTo("1");
+	    assertThat(list.get(1)).isEqualTo("12");
+	    assertThat(list.get(2)).isEqualTo("123");
+	    assertThat(list.get(3)).isEqualTo("12345");
+	    assertThat(list.get(4)).isEqualTo("1234567");
+	}
+	
+	@Test
 	public void sortCollections() {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
@@ -62,10 +82,10 @@ public class CollectionExamples {
 	@Test
 	public void sortCollectionsAndAssertJ() {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
+		
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> integers2.sort((a, b) -> a.compareTo(b)));
-
+		
 //		assertThatExceptionOfType(UnsupportedOperationException.class)
 //				.isThrownBy(() -> integers2.sort((a, b) -> a.compareTo(b)))
 //				.withMessage("%s", "kaputt");
