@@ -49,13 +49,22 @@ public class CollectionExamples {
 	    list.add("123");
 	    list.add("12");
 	    list.add("1");
-	    Collections.sort(list, Comparator.comparingInt(String::length));
-	    
+
+	    // Collections.sort
+	    Collections.sort(list, Comparator.comparingInt(String::length));	    
 	    assertThat(list.get(0)).isEqualTo("1");
 	    assertThat(list.get(1)).isEqualTo("12");
 	    assertThat(list.get(2)).isEqualTo("123");
 	    assertThat(list.get(3)).isEqualTo("12345");
 	    assertThat(list.get(4)).isEqualTo("1234567");
+	    
+	    // List.sort
+	    list.sort(Comparator.comparingInt(String::length));
+        assertThat(list.get(0)).isEqualTo("1");
+        assertThat(list.get(1)).isEqualTo("12");
+        assertThat(list.get(2)).isEqualTo("123");
+        assertThat(list.get(3)).isEqualTo("12345");
+        assertThat(list.get(4)).isEqualTo("1234567");
 	}
 	
 	@Test
