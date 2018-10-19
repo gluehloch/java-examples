@@ -10,6 +10,12 @@ import org.junit.jupiter.api.Test;
 
 public class FutureExample {
 
+    /**
+     * Create a future.
+     * 
+     * @return Future<String> A future
+     * @throws InterruptedException ...
+     */
     private Future<String> calculateAsync() throws InterruptedException {
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
@@ -22,11 +28,23 @@ public class FutureExample {
         return completableFuture;
     }
 
+    /**
+     * Create a future with the static helper method.
+     * 
+     * @return Future<String> A future
+     * @throws InterruptedException ...
+     */
+    private Future<String> calculateAsync2() {
+        return CompletableFuture.completedFuture("Hello2");
+    }
+
     @Test
     public void completableFuture() throws Exception {
         Future<String> future = calculateAsync();
         String result = future.get();
         assertThat(result).isEqualTo("Hello");
+        
+        assertThat(calculateAsync2().get()).isEqualTo("Hello2");
     }
 
 }
