@@ -60,6 +60,7 @@ public class FutureExample {
 
         Executors.newCachedThreadPool().submit(() -> {
             Thread.sleep(500);
+            // Der Parameter in #cancel(boolean) hat keinen Einfluss.
             completableFuture.cancel(false);
             return null;
         });
@@ -67,6 +68,12 @@ public class FutureExample {
         return completableFuture;
     }
 
+    /**
+     * Cancel execution of a {@link CompletableFuture}.
+     *
+     * @throws InterruptedException ...
+     * @throws ExecutionException ...
+     */
     @Test
     public void cancelCompletableFuture()
             throws InterruptedException, ExecutionException {
@@ -77,7 +84,7 @@ public class FutureExample {
             future.get(); // CancellationException
             fail("Expected CancellationException");
         } catch (CancellationException ex) {
-            // ok
+            // ok-
         }
     }
 
