@@ -57,10 +57,12 @@ public class FutureExample {
             throws InterruptedException {
 
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
-
+        
         Executors.newCachedThreadPool().submit(() -> {
             Thread.sleep(500);
             // Der Parameter in #cancel(boolean) hat keinen Einfluss.
+            // Der Thread selbst bricht die Verarbeitung ab.
+            // Kann #cancel(...) auch ausserhalb des Threads aufgerufen werden?
             completableFuture.cancel(false);
             return null;
         });
@@ -84,8 +86,19 @@ public class FutureExample {
             future.get(); // CancellationException
             fail("Expected CancellationException");
         } catch (CancellationException ex) {
-            // ok-
+            // ok.
         }
     }
 
+    @Test
+    public void runAsyncOfCompletableFuture() throws Exception {
+        final StringBuilder sb = new StringBuilder();
+        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+            sb.append("Start calculation ...");
+        });
+        
+        cf.get();
+        assertThat(sb.toString()).isEqualTo("Start calculation ...");
+    }
+    
 }
