@@ -90,6 +90,11 @@ public class FutureExample {
         }
     }
 
+    /**
+     * {@code CompletableFuture#runAsync(Runnable) startet einen eigenen asynchronen Thread.
+     * Utility/Helper Methode um nicht einen Thread-Pool zu eroefnen.
+     * @throws Exception
+     */
     @Test
     public void runAsyncOfCompletableFuture() throws Exception {
         final StringBuilder sb = new StringBuilder();
