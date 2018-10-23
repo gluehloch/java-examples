@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +22,7 @@ public class FutureExample {
      * @throws InterruptedException
      *             ...
      */
-    private Future<String> calculateAsync() throws InterruptedException {
+    private CompletableFuture<String> calculateAsync() throws InterruptedException {
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
         Executors.newCachedThreadPool().submit(() -> {
@@ -40,29 +42,31 @@ public class FutureExample {
      * @throws InterruptedException
      *             ...
      */
-    private Future<String> calculateAsync2() {
+    private CompletableFuture<String> calculateAsync2() {
         return CompletableFuture.completedFuture("Hello2");
     }
 
     @Test
     public void completableFuture() throws Exception {
-        Future<String> future = calculateAsync();
+        CompletableFuture<String> future = calculateAsync();
+        assertThat(future.isCompletedExceptionally()).isFalse();
+
         String result = future.get();
         assertThat(result).isEqualTo("Hello");
-
+        assertThat(future.isCompletedExceptionally()).isFalse();
         assertThat(calculateAsync2().get()).isEqualTo("Hello2");
     }
 
-    private Future<String> calculateAsyncWithCancellation()
+    private CompletableFuture<String> calculateAsyncWithCancellation()
             throws InterruptedException {
 
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
-        
+
         Executors.newCachedThreadPool().submit(() -> {
             Thread.sleep(500);
             // Der Parameter in #cancel(boolean) hat keinen Einfluss.
             // Der Thread selbst bricht die Verarbeitung ab.
-            // Kann #cancel(...) auch ausserhalb des Threads aufgerufen werden?
+            // Kann/darf(?) #cancel(...) auch ausserhalb des Threads aufgerufen werden?
             completableFuture.cancel(false);
             return null;
         });
@@ -73,27 +77,34 @@ public class FutureExample {
     /**
      * Cancel execution of a {@link CompletableFuture}.
      *
-     * @throws InterruptedException ...
-     * @throws ExecutionException ...
+     * @throws InterruptedException
+     *             ...
+     * @throws ExecutionException
+     *             ...
      */
     @Test
     public void cancelCompletableFuture()
             throws InterruptedException, ExecutionException {
 
-        Future<String> future = calculateAsyncWithCancellation();
+        CompletableFuture<String> future = calculateAsyncWithCancellation();
 
         try {
             future.get(); // CancellationException
             fail("Expected CancellationException");
         } catch (CancellationException ex) {
-            // ok.
+            assertThat(future.isCancelled()).isTrue();
+            assertThat(future.isCompletedExceptionally()).isTrue();
         }
     }
 
     /**
-     * {@code CompletableFuture#runAsync(Runnable) startet einen eigenen asynchronen Thread.
-     * Utility/Helper Methode um nicht einen Thread-Pool zu eroefnen.
+     * {@code CompletableFuture#runAsync(Runnable)} startet einen asynchronen
+     * Task/Thread. Utility/Helper Methode um nicht einen Thread-Pool zu
+     * eroeffnen. #runAsync liefert <b>kein</b> Ergebnis zurueck. Vergleiche
+     * auch {@link #completeAsyncOfCompletableFuture()}.
+     * 
      * @throws Exception
+     *             ...
      */
     @Test
     public void runAsyncOfCompletableFuture() throws Exception {
@@ -101,9 +112,34 @@ public class FutureExample {
         CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
             sb.append("Start calculation ...");
         });
-        
+
         cf.get();
         assertThat(sb.toString()).isEqualTo("Start calculation ...");
     }
+
+    /**
+     * {@code CompletableFuture#completeAsync(java.util.function.Supplier)}
+     * startet einen asynchronen Task/Thread. {@code #completeAsync()} liefert
+     * ein Ergebnis zurueck. Vergleiche auch
+     * {@link #runAsyncOfCompletableFuture()}.
+     * 
+     * @throws Exception
+     *             ...
+     */
+    @Test
+    public void completeAsyncOfCompletableFuture() throws Exception {
+        CompletableFuture<String> cf = new CompletableFuture<>();
+        cf.completeAsync(() -> {
+            return "Hallo";
+        });
+        assertThat(cf.get()).isEqualTo("Hallo");
+    }
     
+    @Test
+    public void xxx() throws Exception {
+        CompletableFuture<String> cf = new CompletableFuture<>();
+        CompletionStage<? extends String> other = null;
+        Consumer<? super String> action = null;
+        cf.acceptEither(other, action);
+    }
 }
