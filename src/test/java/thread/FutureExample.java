@@ -8,9 +8,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class FutureExample {
@@ -22,7 +22,8 @@ public class FutureExample {
      * @throws InterruptedException
      *             ...
      */
-    private CompletableFuture<String> calculateAsync() throws InterruptedException {
+    private CompletableFuture<String> calculateAsync()
+            throws InterruptedException {
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
         Executors.newCachedThreadPool().submit(() -> {
@@ -66,7 +67,8 @@ public class FutureExample {
             Thread.sleep(500);
             // Der Parameter in #cancel(boolean) hat keinen Einfluss.
             // Der Thread selbst bricht die Verarbeitung ab.
-            // Kann/darf(?) #cancel(...) auch ausserhalb des Threads aufgerufen werden?
+            // Kann/darf(?) #cancel(...) auch ausserhalb des Threads aufgerufen
+            // werden?
             completableFuture.cancel(false);
             return null;
         });
@@ -134,8 +136,28 @@ public class FutureExample {
         });
         assertThat(cf.get()).isEqualTo("Hallo");
     }
-    
+
     @Test
+    public void completableFutureWithMultipleParallelTasks() throws Exception {
+        CompletableFuture<String> future1 = CompletableFuture
+                .supplyAsync(() -> "Hello");
+        CompletableFuture<String> future2 = CompletableFuture
+                .supplyAsync(() -> "Beautiful");
+        CompletableFuture<String> future3 = CompletableFuture
+                .supplyAsync(() -> "World");
+
+        CompletableFuture<Void> combinedFuture = CompletableFuture
+                .allOf(future1, future2, future3);
+
+        combinedFuture.get();
+
+        assertThat(future1.isDone()).isTrue();
+        assertThat(future2.isDone()).isTrue();
+        assertThat(future3.isDone()).isTrue();
+    }
+
+    @Test
+    @Disabled
     public void xxx() throws Exception {
         CompletableFuture<String> cf = new CompletableFuture<>();
         CompletionStage<? extends String> other = null;
