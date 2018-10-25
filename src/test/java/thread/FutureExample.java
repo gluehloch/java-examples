@@ -24,6 +24,7 @@ public class FutureExample {
      */
     private CompletableFuture<String> calculateAsync()
             throws InterruptedException {
+
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
         Executors.newCachedThreadPool().submit(() -> {
@@ -50,11 +51,11 @@ public class FutureExample {
     @Test
     public void completableFuture() throws Exception {
         CompletableFuture<String> future = calculateAsync();
-        assertThat(future.isCompletedExceptionally()).isFalse();
 
         String result = future.get();
         assertThat(result).isEqualTo("Hello");
         assertThat(future.isCompletedExceptionally()).isFalse();
+
         assertThat(calculateAsync2().get()).isEqualTo("Hello2");
     }
 
@@ -66,9 +67,6 @@ public class FutureExample {
         Executors.newCachedThreadPool().submit(() -> {
             Thread.sleep(500);
             // Der Parameter in #cancel(boolean) hat keinen Einfluss.
-            // Der Thread selbst bricht die Verarbeitung ab.
-            // Kann/darf(?) #cancel(...) auch ausserhalb des Threads aufgerufen
-            // werden?
             completableFuture.cancel(false);
             return null;
         });
@@ -77,7 +75,8 @@ public class FutureExample {
     }
 
     /**
-     * Cancel execution of a {@link CompletableFuture}.
+     * Cancel execution of a {@link CompletableFuture}. The thread himself
+     * cancels the {@link CompletableFuture}.
      *
      * @throws InterruptedException
      *             ...
