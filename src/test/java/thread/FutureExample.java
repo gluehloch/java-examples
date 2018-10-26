@@ -9,6 +9,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -156,8 +157,38 @@ public class FutureExample {
     }
 
     @Test
+    public void composedCompletableFuture() throws Exception {
+        CompletableFuture<String> future1 = CompletableFuture
+                .supplyAsync(() -> "Hello").thenComposeAsync(
+                        s -> CompletableFuture.supplyAsync(() -> s + " world"));
+        assertThat(future1.get()).isEqualTo("Hello world");
+
+        CompletableFuture<String> future2 = CompletableFuture
+                .supplyAsync(() -> "Hello").thenCompose(s -> CompletableFuture
+                        .supplyAsync(() -> s + " world 2"));
+        assertThat(future2.get()).isEqualTo("Hello world 2");
+
+        CompletableFuture<String> cf = new CompletableFuture<>();
+
+        CompletableFuture<String> compose1 = cf.completeAsync(() -> "Hallo")
+                .thenCompose(
+                        s -> CompletableFuture.supplyAsync(() -> s + " Andre"));
+        assertThat(compose1.get()).isEqualTo("Hallo Andre");
+
+        CompletableFuture<String> compose2 = cf.completeAsync(() -> "Hallo")
+                .thenApply(s -> s + " Andre 2");
+        assertThat(compose2.get()).isEqualTo("Hallo Andre 2");
+
+    }
+
+    /**
+     * TODO
+     * 
+     * @throws Exception
+     */
+    @Test
     @Disabled
-    public void xxx() throws Exception {
+    public void acceptEither() throws Exception {
         CompletableFuture<String> cf = new CompletableFuture<>();
         CompletionStage<? extends String> other = null;
         Consumer<? super String> action = null;
