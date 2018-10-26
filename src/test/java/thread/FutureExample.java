@@ -167,9 +167,15 @@ public class FutureExample {
                 .supplyAsync(() -> "Hello").thenCompose(s -> CompletableFuture
                         .supplyAsync(() -> s + " world 2"));
         assertThat(future2.get()).isEqualTo("Hello world 2");
+    }
 
+    @Test
+    public void supplyAsyncAndthenApply() throws Exception {
         CompletableFuture<String> cf = new CompletableFuture<>();
 
+        // thenCompose: Nimmt ein CompletableFuture entgegen, um dieses
+        // asynchron auszufuehren, wenn das Ergebnis der Vorberechnung fest
+        // steht.
         CompletableFuture<String> compose1 = cf.completeAsync(() -> "Hallo")
                 .thenCompose(
                         s -> CompletableFuture.supplyAsync(() -> s + " Andre"));
@@ -178,7 +184,6 @@ public class FutureExample {
         CompletableFuture<String> compose2 = cf.completeAsync(() -> "Hallo")
                 .thenApply(s -> s + " Andre 2");
         assertThat(compose2.get()).isEqualTo("Hallo Andre 2");
-
     }
 
     /**
