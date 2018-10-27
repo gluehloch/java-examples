@@ -8,6 +8,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Disabled;
@@ -15,6 +17,19 @@ import org.junit.jupiter.api.Test;
 
 public class FutureExample {
 
+    @Test
+    public void dontDoThat() {
+        CompletableFuture<String> cf = new CompletableFuture<>();
+        try {
+            // cf.get() would wait forever! Don´t do that!
+            cf.get(10, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException
+                | TimeoutException ex) {
+
+            assertThat(ex).isNotNull();
+        }
+    }
+    
     /**
      * Create a future.
      * 
