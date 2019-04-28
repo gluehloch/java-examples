@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Java 8 Examples</name>
+	<name>Java 8/9/10/11 Examples</name>
 	<inceptionYear>2017</inceptionYear>
 
 	<build>
@@ -57,10 +57,10 @@
 		</dependency>
 	</dependencies>
 
-	<description>Java 8 examples</description>
+	<description>Java 8/9/10/11/12 examples</description>
 
 	<properties>
-		<junit.jupiter.version>5.2.0</junit.jupiter.version>
+		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
 	</properties>
 </project>
