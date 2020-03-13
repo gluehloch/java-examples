@@ -14,7 +14,6 @@ public class OptionalShowCase {
         assertThat(calculate("Lars").map((a) -> "Winkler").orElse(null)).isNull();
     }
     
-    
     private Optional<String> calculate(String string) {
         if (string.startsWith("A")) {
             return Optional.of("Andre");
