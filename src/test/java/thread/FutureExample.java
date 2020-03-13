@@ -11,7 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,9 +23,7 @@ public class FutureExample {
         try {
             // cf.get() would wait forever! Don´t do that!
             cf.get(10, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException | ExecutionException
-                | TimeoutException ex) {
-
+        } catch (InterruptedException | ExecutionException | TimeoutException ex) {
             assertThat(ex).isNotNull();
         }
     }
@@ -38,9 +35,7 @@ public class FutureExample {
      * @throws InterruptedException
      *             ...
      */
-    private CompletableFuture<String> calculateAsync()
-            throws InterruptedException {
-
+    private CompletableFuture<String> calculateAsync() throws InterruptedException {
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
         Executors.newCachedThreadPool().submit(() -> {
