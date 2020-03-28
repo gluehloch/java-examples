@@ -1,6 +1,6 @@
 package misc;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for some things: Collection to stream with reduce.
