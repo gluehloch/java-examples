@@ -3,6 +3,7 @@ package misc;
 import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.tuple;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,6 +66,9 @@ public class CollectionExamples {
         assertThat(list.get(2)).isEqualTo("123");
         assertThat(list.get(3)).isEqualTo("12345");
         assertThat(list.get(4)).isEqualTo("1234567");
+        
+        // TODO Das ist ein interessanted Konstrukt. Kann man das irgendwie sinnvoll verwenden?
+        assertThat(list).extracting(e -> e.charAt(0), e -> e.toLowerCase()).contains(tuple('1', "1"));
 	}
 	
 	@Test
