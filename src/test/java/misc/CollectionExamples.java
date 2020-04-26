@@ -67,7 +67,7 @@ public class CollectionExamples {
         assertThat(list.get(3)).isEqualTo("12345");
         assertThat(list.get(4)).isEqualTo("1234567");
         
-        // TODO Das ist ein interessanted Konstrukt. Kann man das irgendwie sinnvoll verwenden?
+        // TODO Das ist ein interessantes Konstrukt. Kann man das irgendwie sinnvoll verwenden?
         assertThat(list).extracting(e -> e.charAt(0), e -> e.toLowerCase()).contains(tuple('1', "1"));
 	}
 	
