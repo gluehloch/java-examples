@@ -12,9 +12,8 @@ import org.junit.jupiter.api.Test;
 public class Java11FeatureShow {
 
     @Test
-    public void xxx() {
+    public void switchCaseWithString() {
         var xxx = "Ahorn";
-        // Ups. My Eclipse installation does not suppot JDK 11.
         switch (xxx) {
             case "Ahorn": xxx = "Ahorn"; break;
             case "Buche": xxx = "Buche"; break;
