@@ -57,7 +57,7 @@
 		</dependency>
 	</dependencies>
 
-	<description>Java 8/9/10/11/12 examples</description>
+	<description>Java 8/9/10/11/12/14 examples</description>
 
 	<properties>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
