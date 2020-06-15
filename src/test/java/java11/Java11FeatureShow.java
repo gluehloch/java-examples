@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author winkler
  */
-public class Java11FeatureShow {
+class Java11FeatureShow {
 
     @Test
     public void switchCaseWithString() {
