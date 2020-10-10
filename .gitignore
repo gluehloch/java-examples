@@ -3,6 +3,8 @@
 .project
 .settings
 
+java-examples.iml
+
 /bin
 
 # Maven
@@ -10,4 +12,7 @@
 
 # VSCode
 .vscode
+
+# Intellij
+.idea
 
