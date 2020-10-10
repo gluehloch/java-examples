@@ -37,6 +37,9 @@
 						<version>${junit.platform.version}</version>
 					</dependency>
 				</dependencies>
+				<configuration>
+					<argLine>--enable-preview</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -58,9 +61,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<description>Java 8/9/10/11/12/13/14 examples</description>
-
 	<properties>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
