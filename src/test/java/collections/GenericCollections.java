@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 /**
  * Chapter 5 GENERICS. Use bounded wildcards to increase API flexibility.
  * 
- * PECS stands for producer-extends, consumer-super. 
+ * PECS stands for producer-extends, consumer-super.
+ *
+ * Was bedeutet das? Die Begrifflichkeit ist eher verwirrend. 'extends'
+ * scheint dann sinnvoll zu sein, wenn die Methode die Elemente aus
+ * der Collection verarbeitet, ohne die Collection selbst zu veraendern.
  * 
  * @author winkler
  */
@@ -17,8 +21,8 @@ public class GenericCollections {
 
     @Test
     void genericCollection() {
-        DoItA doItA = new DoItA();
-        DoItB doItB = new DoItB();
+        var doItA = new DoItA();
+        var doItB = new DoItB();
         
         List<SuperClass> doits = List.of(doItA, doItB);        
         doSomething(doits);
@@ -36,11 +40,14 @@ public class GenericCollections {
         List<? extends SuperClass> superClasses = copy(doits); // Ok!
         // List<SuperClass> superClasses2 = copy(doits); // Don´t work!
         
-        List<? extends SuperClass> someOtherSupes = create();
+        List<? extends SuperClass> someOtherSupers = create();
+        var someOtherVarSupers = create();
+        someOtherVarSupers.forEach(SuperClass::doIt);
     }
     
     /**
-     * This is a consumer: super.
+     * Ist das ein Consumer oder ein Producer? Da extends hier sinnvoll ist,
+     * muss es sich um einen Producer handeln.
      *
      * @param doits
      */
