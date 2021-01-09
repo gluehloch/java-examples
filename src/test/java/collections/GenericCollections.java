@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class GenericCollections {
 
     @Test
-    void genericCollection() {
+    void genericProducerCollections() {
         var doItA = new DoItA();
         var doItB = new DoItB();
         
@@ -43,6 +43,16 @@ public class GenericCollections {
         List<? extends SuperClass> someOtherSupers = create();
         var someOtherVarSupers = create();
         someOtherVarSupers.forEach(SuperClass::doIt);
+    }
+    
+    @Test
+    void genericConsumerCollections() {
+        var doits = List.of(new DoItA(), new DoItB());
+        List<Object> objects = new ArrayList<>();
+        
+        Stack<SuperClass> superStack = new Stack<>(doits);
+        superStack.moveTo(objects);
+        // superStack.moveToWithoutSuperGenericParam(objects); // Don´t work!
     }
     
     /**
@@ -94,4 +104,20 @@ public class GenericCollections {
         }
     }
     
+    // -------------------------------------------------
+    
+    private static class Stack<T> {
+        private final List<T> doits;
+        public Stack(List<T> doits) {
+            this.doits = doits;
+        }
+        public void moveTo(List<? super T> moveToMe) {
+            moveToMe.addAll(doits);
+        }
+        
+        public void moveToWithoutSuperGenericParam(List<T> moveToMe) {
+            moveToMe.addAll(doits);
+        }
+    }
+
 }
