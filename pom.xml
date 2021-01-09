@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Java 8/9/10/11/12/13/14 Examples</name>
+	<name>Java 8/9/10/11/12/13/14/15 Examples</name>
 	<inceptionYear>2017</inceptionYear>
 
 	<build>
@@ -20,11 +20,13 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>14</release>
+					<release>15</release>
 				    <compilerArgs>--enable-preview</compilerArgs>
 					<encoding>UTF-8</encoding>
-					<source>14</source>
-					<target>14</target>
+					<!--
+					<source>15</source>
+					<target>15</target>
+					-->
 				</configuration>
 			</plugin>
 			<plugin>

@@ -67,8 +67,7 @@ public class CollectionExamples {
         assertThat(list.get(3)).isEqualTo("12345");
         assertThat(list.get(4)).isEqualTo("1234567");
         
-        // TODO Das ist ein interessantes Konstrukt. Kann man das irgendwie sinnvoll verwenden?
-        // TODO Beispiel mit Objekten in der Liste und dem abfragen verschiedener Eigenschaften.
+        /* Siehe auch {@code ListAssert#assertJdemo} Demo. */
         assertThat(list).extracting(e -> e.charAt(0), e -> e.toLowerCase()).contains(tuple('1', "1"));
 	}
 	
