@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 class ListAssert {
 
+    @SuppressWarnings("static-access")
     @Test
     public void assertJdemo() {
         final Person a = Person.of("Winkler", "Andre");
