@@ -75,7 +75,7 @@ public class GenericCollections {
     }
     
     private List<? extends SuperClass> copy(List<? extends SuperClass> doits) {
-        List<SuperClass> supers = new ArrayList<>();
+        List<SuperClass> collection1 = doits.stream().collect(Collectors.toList()); // With and without '? extends'.
         List<? extends SuperClass> collection = doits.stream().collect(Collectors.toList());
         return collection;
     }
