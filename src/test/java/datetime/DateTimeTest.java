@@ -44,9 +44,6 @@ public class DateTimeTest {
         
         ZoneOffset zoneUtc = ZoneOffset.of("Z");
         assertThat(zoneUtc).isNotNull();
-
-        ZoneId zoneId = ZoneId.of("");
-        assertThat(zoneId).isNotNull();
     }
 
     @Tag(JTAG)
