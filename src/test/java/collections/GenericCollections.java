@@ -43,6 +43,11 @@ public class GenericCollections {
         List<? extends SuperClass> someOtherSupers = create();
         var someOtherVarSupers = create();
         someOtherVarSupers.forEach(SuperClass::doIt);
+        
+        // The super-collection trick does only work with parameters. Not with return types.
+        // List<Object> objectsShouldWork = createSuper();
+        // The next statement doesn´t make sense.
+        List<? super SuperClass> createSuper = createSuper();
     }
     
     @Test
@@ -50,9 +55,14 @@ public class GenericCollections {
         var doits = List.of(new DoItA(), new DoItB());
         List<Object> objects = new ArrayList<>();
         
+        SuperClass superClass = doits.get(0);
+        
         Stack<SuperClass> superStack = new Stack<>(doits);
+        // Moving all SuperClass objects from stack to list of Objects.
         superStack.moveTo(objects);
-        // superStack.moveToWithoutSuperGenericParam(objects); // Don´t work!
+        // Don´t work! Cause #moveToWithoutSuperGenericParam() accept only
+        // lists with type List<SuperClass> and rejects List<Object>.
+        // superStack.moveToWithoutSuperGenericParam(objects);
     }
     
     /**
@@ -77,10 +87,15 @@ public class GenericCollections {
     private List<? extends SuperClass> copy(List<? extends SuperClass> doits) {
         List<SuperClass> collection1 = doits.stream().collect(Collectors.toList()); // With and without '? extends'.
         List<? extends SuperClass> collection = doits.stream().collect(Collectors.toList());
+        // Works too: return collection1;
         return collection;
     }
     
     private List<? extends SuperClass> create() {
+        return new ArrayList<SuperClass>();
+    }
+    
+    private List<? super SuperClass> createSuper() {
         return new ArrayList<SuperClass>();
     }
     
