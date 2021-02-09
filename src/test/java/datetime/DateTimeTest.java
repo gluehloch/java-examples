@@ -49,8 +49,9 @@ public class DateTimeTest {
     @Tag(JTAG)
     @Test
     void zoneDateTime() {
-        DateTimeFormatter airportDateTimeFormat = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
+        DateTimeFormatter airportDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+        // 22.08.2016 14:30 Uhr
         LocalDateTime ldt = LocalDateTime.of(2016, Month.AUGUST, 22, 14, 30);
         System.out.println("LocalDateTime : " + airportDateTimeFormat.format(ldt));
 
@@ -58,9 +59,10 @@ public class DateTimeTest {
         ZonedDateTime klDateTime = ldt.atZone(ASIA_KUALA_LUMPUR);
         System.out.println("Depart : " + airportDateTimeFormat.format(klDateTime));
 
-        // UTC+9 and flight duration = 7 hours
+        // UTC+9 and flight duration = 7 hours => #withZomeSameInstant vs. #atZone
         ZonedDateTime japanDateTime = klDateTime.withZoneSameInstant(ASIA_TOKYO).plusHours(7);
-        System.out.println("Arrive : " + airportDateTimeFormat.format(japanDateTime));
+        System.out.println("Arrive +7 hours at Tokyo and Kuala Lumpur timezone: " + airportDateTimeFormat.format(klDateTime.plusHours(7)));
+        System.out.println("Arrive +7 hours and Tokyo timezone: " + airportDateTimeFormat.format(japanDateTime));
         
         System.out.println("\n---Detail---");
         System.out.println("Depart : " + klDateTime);
