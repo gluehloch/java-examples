@@ -11,6 +11,7 @@ public class Java15ShowCase {
 	public void printf() {
 		System.out.printf("Das ist mein %d. Test", 1);
 		System.out.println(String.format("Das ist mein %d. Test.", 1));
+		System.out.println(String.format("Das ist mein %1$d. und mein %1$d Test. %2$d", 1, 2));
 	}
 
 //	public String getString(String test) {
