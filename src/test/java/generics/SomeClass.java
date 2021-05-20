@@ -25,6 +25,7 @@ public class SomeClass implements SomeInterface<SomeClass> {
         list.add(someClass3);
         
         SomeInterface<?> someClass4 = list.get(0).getSomeClass();
+        someClass4.getSomeClass().getSomeClass();
         // Die Typinformation (?) geht hier verloren.
     }
     
