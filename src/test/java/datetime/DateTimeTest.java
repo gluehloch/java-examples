@@ -17,6 +17,8 @@ public class DateTimeTest {
     private static final String JTAG = "dateTime";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
+    private static final DateTimeFormatter FORMATTER_WITHOUT_TIMEZONE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    
     private static final ZoneId EUROPE_BERLIN = ZoneId.of("Europe/Berlin");
     private static final ZoneId ASIA_KUALA_LUMPUR = ZoneId.of("Asia/Kuala_Lumpur");
     private static final ZoneId ASIA_TOKYO = ZoneId.of("Asia/Tokyo");
@@ -34,6 +36,12 @@ public class DateTimeTest {
         assertThat(atZone.toString()).isEqualTo("2020-03-24T12:00+01:00[Europe/Berlin]");
 
         assertThat(atZone).isNotEqualTo(dateTimeOffset01);
+        
+        var date_2020_03_24 = LocalDateTime.parse("2020-03-24 12:00:00", FORMATTER_WITHOUT_TIMEZONE);
+        var date_2020_03_24_13 = LocalDateTime.parse("2020-03-24 13:00:00", FORMATTER_WITHOUT_TIMEZONE);
+        assertThat(date_2020_03_24).isEqualTo(dateTimeOffset01);
+        assertThat(date_2020_03_24).isEqualTo(dateTimeOffset02);
+        assertThat(date_2020_03_24).isNotEqualTo(date_2020_03_24_13);
     }
 
     @Tag(JTAG)
