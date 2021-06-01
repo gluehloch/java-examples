@@ -36,12 +36,21 @@ public class DateTimeTest {
         assertThat(atZone.toString()).isEqualTo("2020-03-24T12:00+01:00[Europe/Berlin]");
 
         assertThat(atZone).isNotEqualTo(dateTimeOffset01);
-        
+                
         var date_2020_03_24 = LocalDateTime.parse("2020-03-24 12:00:00", FORMATTER_WITHOUT_TIMEZONE);
         var date_2020_03_24_13 = LocalDateTime.parse("2020-03-24 13:00:00", FORMATTER_WITHOUT_TIMEZONE);
+        
         assertThat(date_2020_03_24).isEqualTo(dateTimeOffset01);
         assertThat(date_2020_03_24).isEqualTo(dateTimeOffset02);
         assertThat(date_2020_03_24).isNotEqualTo(date_2020_03_24_13);
+        
+        ZoneId zone = ZoneId.of("Europe/Berlin");
+        var zone_date_2020_03_24 = date_2020_03_24.atZone(zone);
+        assertThat(zone_date_2020_03_24).isNotEqualTo(date_2020_03_24);
+        assertThat(date_2020_03_24).isNotEqualTo(zone_date_2020_03_24);
+        
+        assertThat(zone_date_2020_03_24).isInstanceOf(ZonedDateTime.class);
+        assertThat(date_2020_03_24).isInstanceOf(LocalDateTime.class);
     }
 
     @Tag(JTAG)
