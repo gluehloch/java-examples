@@ -1,6 +1,7 @@
 package misc;
 
 import static java.util.Map.entry;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.tuple;
@@ -20,9 +21,21 @@ import org.junit.jupiter.api.Test;
  * Some new Java 9 / 10 features.
  * 
  * @author Andre Winkler
- * @since 2018
+ * @since 2018/2021
  */
 public class CollectionExamples {
+
+	public void joinStrings() {
+		List<String> things = List.of("A", "B", "C", "D", "E");
+
+		// Accumulate names into a List
+		List<String> list = things.stream().map(Object::toString).collect(Collectors.toList());
+		assertThat(list).containsExactly("A", "B", "C", "D", "E");
+
+		// Convert elements to strings and concatenate them, separated by commas
+		String joined = things.stream().map(Object::toString).collect(Collectors.joining(", "));
+		assertThat(joined).isEqualTo("A, B, C, D, E");
+	}
 
 	@Test
 	public void createCollections() {
@@ -44,33 +57,33 @@ public class CollectionExamples {
 
 	@Test
 	public void sortCollections2() {
-	    var list = new ArrayList<String>();
-	    list.add("1234567");
-	    list.add("12345");
-	    list.add("123");
-	    list.add("12");
-	    list.add("1");
+		var list = new ArrayList<String>();
+		list.add("1234567");
+		list.add("12345");
+		list.add("123");
+		list.add("12");
+		list.add("1");
 
-	    // Collections.sort
-	    Collections.sort(list, Comparator.comparingInt(String::length));	    
-	    assertThat(list.get(0)).isEqualTo("1");
-	    assertThat(list.get(1)).isEqualTo("12");
-	    assertThat(list.get(2)).isEqualTo("123");
-	    assertThat(list.get(3)).isEqualTo("12345");
-	    assertThat(list.get(4)).isEqualTo("1234567");
-	    
-	    // List.sort
-	    list.sort(Comparator.comparingInt(String::length));
-        assertThat(list.get(0)).isEqualTo("1");
-        assertThat(list.get(1)).isEqualTo("12");
-        assertThat(list.get(2)).isEqualTo("123");
-        assertThat(list.get(3)).isEqualTo("12345");
-        assertThat(list.get(4)).isEqualTo("1234567");
-        
-        /* Siehe auch {@code ListAssert#assertJdemo} Demo. */
-        assertThat(list).extracting(e -> e.charAt(0), e -> e.toLowerCase()).contains(tuple('1', "1"));
+		// Collections.sort
+		Collections.sort(list, Comparator.comparingInt(String::length));
+		assertThat(list.get(0)).isEqualTo("1");
+		assertThat(list.get(1)).isEqualTo("12");
+		assertThat(list.get(2)).isEqualTo("123");
+		assertThat(list.get(3)).isEqualTo("12345");
+		assertThat(list.get(4)).isEqualTo("1234567");
+
+		// List.sort
+		list.sort(Comparator.comparingInt(String::length));
+		assertThat(list.get(0)).isEqualTo("1");
+		assertThat(list.get(1)).isEqualTo("12");
+		assertThat(list.get(2)).isEqualTo("123");
+		assertThat(list.get(3)).isEqualTo("12345");
+		assertThat(list.get(4)).isEqualTo("1234567");
+
+		/* Siehe auch {@code ListAssert#assertJdemo} Demo. */
+		assertThat(list).extracting(e -> e.charAt(0), e -> e.toLowerCase()).contains(tuple('1', "1"));
 	}
-	
+
 	@Test
 	public void sortCollections() {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -95,10 +108,10 @@ public class CollectionExamples {
 	@Test
 	public void sortCollectionsAndAssertJ() {
 		var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-		
+
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> integers2.sort((a, b) -> a.compareTo(b)));
-		
+
 //		assertThatExceptionOfType(UnsupportedOperationException.class)
 //				.isThrownBy(() -> integers2.sort((a, b) -> a.compareTo(b)))
 //				.withMessage("%s", "kaputt");
