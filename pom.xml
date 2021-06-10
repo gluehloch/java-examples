@@ -23,10 +23,8 @@
 					<release>16</release>
 				    <compilerArgs>--enable-preview</compilerArgs>
 					<encoding>UTF-8</encoding>
-					<!--
-					<source>15</source>
-					<target>15</target>
-					-->
+					<source>16</source>
+					<target>16</target>
 				</configuration>
 			</plugin>
 			<plugin>

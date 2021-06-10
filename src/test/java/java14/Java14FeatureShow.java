@@ -14,7 +14,7 @@ public class Java14FeatureShow {
 
     String html = "<html>\n" +
             "   <body>\n" +
-             "      <p>Hello, Escapes</p>\n" +
+             "      <p>Hello, Text Blocks</p>\n" +
             "   </body>\n" +
             "</html>\n";
     
@@ -51,7 +51,7 @@ public class Java14FeatureShow {
     @Tag("Java 14 feature.")
     @Test
     public void multiLineStrings() {
-        assertThat(html2).isEqualTo(html);
+        assertThat(html2).isEqualToIgnoringNewLines(html);
     }
 
 }
