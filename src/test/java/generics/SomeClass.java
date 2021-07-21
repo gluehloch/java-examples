@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SomeClass implements SomeInterface<SomeClass> {
 
+    @Override
     public SomeClass getSomeClass() {
         return this;
     }
