@@ -3,17 +3,32 @@ package optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-public class OptionalShowCase {
+class OptionalShowCase {
 
     @Test
-    public void optionalReturnNull() {
-        assertThat(calculate("Andre").map((a) -> "Winkler").orElse(null)).isEqualTo("Winkler");
-        assertThat(calculate("Lars").map((a) -> "Winkler").orElse(null)).isNull();
+    void optionalReturnNull() {
+        assertThat(calculate("Andre").map(a -> "Winkler").orElse(null)).isEqualTo("Winkler");
+        assertThat(calculate("Lars").map(a -> "Winkler").orElse(null)).isEqualTo("Winkler");
     }
-    
+
+    @Test
+    void streamingOptional() {
+        Optional<String> emptyString = Optional.empty();
+        Optional<String> someString = Optional.of("Not Empty");
+        
+        Optional<Boolean> empty = Optional.empty();
+
+        assertThat(emptyString.stream().map(i -> i.startsWith("Empty")).collect(Collectors.toSet())).isEmpty();
+        assertThat(someString.stream().map(i -> i.endsWith("Empty")).collect(Collectors.toSet())).containsExactlyInAnyOrder(Boolean.TRUE);
+
+        assertThat(empty).isEmpty();
+        empty.stream().map(i -> i.booleanValue());
+    }
+
     private Optional<String> calculate(String string) {
         if (string.startsWith("A")) {
             return Optional.of("Andre");
