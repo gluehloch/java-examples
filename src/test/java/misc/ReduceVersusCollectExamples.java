@@ -20,9 +20,10 @@ import org.junit.jupiter.api.Test;
 public class ReduceVersusCollectExamples {
 
 	/**
-	 * TODO JDK 16. OutOfMemory. What is going on here? Maven executes this test very well.
+	 * TODO JDK 16. OutOfMemory. What is going on here? Maven executes this test
+	 * very well.
 	 */
-	//@Disabled
+	// @Disabled
 	@Test
 	public void joiningSomeStrings() {
 		List<String> integers = integers(100);

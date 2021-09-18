@@ -17,11 +17,11 @@ import org.junit.jupiter.api.Test;
  */
 public class ReadTestFileFromClasspath {
 
-    @Test
-    public void readFileFromClasspath() {
-        InputStream inputStream = ReadTestFileFromClasspath.class.getResourceAsStream("TestFile.txt");
-        assertThat(new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n")))
-                .isEqualTo("This is a test.");
-    }
+	@Test
+	public void readFileFromClasspath() {
+		InputStream inputStream = ReadTestFileFromClasspath.class.getResourceAsStream("TestFile.txt");
+		assertThat(new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n")))
+				.isEqualTo("This is a test.");
+	}
 
 }

@@ -11,15 +11,20 @@ import org.junit.jupiter.api.Test;
  */
 class Java11FeatureShow {
 
-    @Test
-    public void switchCaseWithString() {
-        var xxx = "Ahorn";
-        switch (xxx) {
-            case "Ahorn": xxx = "Ahorn"; break;
-            case "Buche": xxx = "Buche"; break;
-            default: xxx = "Wiese";
-        }
-        assertThat(xxx).isEqualTo("Ahorn");
-    }
+	@Test
+	public void switchCaseWithString() {
+		var xxx = "Ahorn";
+		switch (xxx) {
+		case "Ahorn":
+			xxx = "Ahorn";
+			break;
+		case "Buche":
+			xxx = "Buche";
+			break;
+		default:
+			xxx = "Wiese";
+		}
+		assertThat(xxx).isEqualTo("Ahorn");
+	}
 
 }
