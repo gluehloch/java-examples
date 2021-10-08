@@ -25,7 +25,22 @@ class ListAssert {
 		final List<Person> list = List.of(a, b, c, d);
 
 		assertThat(list).extracting("name", "firstName").contains(
-				tuple("Winkler", "Andre").tuple("Winkler", "Adam").tuple("Winkler", "Lars").tuple("Winkler", "Erwin"));
+				tuple("Winkler", "Andre"),
+				tuple("Winkler", "Adam"),
+				tuple("Winkler", "Lars"),
+				tuple("Winkler", "Erwin"));
+
+		assertThat(list).extracting("name", "firstName").containsOnly(
+				tuple("Winkler", "Andre"),
+				tuple("Winkler", "Adam"),
+				tuple("Winkler", "Lars"),
+				tuple("Winkler", "Erwin"));
+
+		assertThat(list).extracting("name", "firstName").containsExactlyInAnyOrder(
+				tuple("Winkler", "Andre"),
+				tuple("Winkler", "Adam"),
+				tuple("Winkler", "Lars"),
+				tuple("Winkler", "Erwin"));
 	}
 
 	private static class Person {
