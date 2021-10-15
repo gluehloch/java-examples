@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,4 +40,17 @@ public class StreamExamples {
         assertThat(map.keySet()).containsExactlyInAnyOrder(list.toArray(new String[0]));
     }
 
+    @DisplayName("Example: Stream with #map vs #flatMap")
+    @Tag("streams")
+    @Test
+    void streamToMapVsFlatMap() {
+        List<String> list = List.of("Andre", "Lars", "Adam", "Erwin", "Christine");
+
+        List<String> list2 = list.stream().map(String::toLowerCase).toList();
+        assertThat(list2).containsExactly("andre", "lars", "adam", "erwin", "christine");
+
+        List<List<String>> listOfLists = List.of(List.of("Andre", "Christine"), List.of("Adam", "Lars", "Erwin"));
+        List<String> list3 = listOfLists.stream().flatMap(Collection::stream).map(String::toLowerCase).toList();
+        assertThat(list3).containsExactlyInAnyOrder("andre", "lars", "adam", "erwin", "christine");
+    }
 }
