@@ -1,5 +1,7 @@
 package stringformat;
 
+import static de.awtools.string.ExceptionMessageFormatter.format;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,12 @@ public class StringFormatter {
 		assertThat(String.format("Das ist mein %d. Test.", 1)).isEqualTo("Das ist mein 1. Test.");
 		assertThat(String.format("Das ist mein %1$d. und mein %1$d. Test. %2$d", 1, 2))
 				.isEqualTo("Das ist mein 1. und mein 1. Test. 2");
+	}
+
+	@Test
+	public void formatter() {
+		String str = format(() -> "string {}", "string");
+		assertThat(str).isEqualTo("string string");
 	}
 
 //	public String getString(String test) {

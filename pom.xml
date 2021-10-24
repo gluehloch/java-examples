@@ -46,12 +46,22 @@
 
 	<dependencies>
 		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-jdk14</artifactId>
+		    <version>1.7.32</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
 			<version>3.10.0</version>
 			<scope>test</scope>
 		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -61,7 +71,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<description>Java 8/9/10/11/12/13/14 examples</description>
+	<description>Java 8/9/10/11/12/13/14/15/16 examples</description>
 	<properties>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
