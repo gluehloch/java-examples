@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class CopyCollection {
 
+    @DisplayName("Example: Copy a collection")
+    @Tag("collections")
     @Test
     void copyCollections() {
         List<String> strings = List.of("Andre", "Christine", "Adam", "Lars", "Erwin");
