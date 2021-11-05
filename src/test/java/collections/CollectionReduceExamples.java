@@ -1,4 +1,4 @@
-package misc;
+package collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,8 +19,9 @@ import org.junit.jupiter.api.Test;
  */
 public class CollectionReduceExamples {
 
+    @Tag("collections")
 	@Test
-	public void sumUpCollectionElements() {
+	void sumUpCollectionElements() {
 		assertThat(Arrays.asList(10, 20, 30).stream().reduce((result, element) -> result + element).get())
 				.isEqualTo(60);
 		assertThat(Arrays.asList(10).stream().reduce((result, element) -> result + element).get()).isEqualTo(10);
@@ -51,8 +53,9 @@ public class CollectionReduceExamples {
 		Arrays.asList(10, 20, 30).stream().reduce(identity, accumulator, combiner);
 	}
 
+    @Tag("collections")
 	@Test
-	public void sumUpAllCollectionElements() {
+	void sumUpAllCollectionElements() {
 		var integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 		int sum = integers.stream().reduce((Integer result, Integer element) -> {
@@ -63,8 +66,9 @@ public class CollectionReduceExamples {
 		System.out.printf("Summe: %1$d%n", sum);
 	}
 
+    @Tag("collections")
 	@Test
-	public void sumUpAllCollectionElements2() {
+	void sumUpAllCollectionElements2() {
 		var integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 		int sum = integers.stream().reduce((Integer result, Integer element) -> {
@@ -75,8 +79,9 @@ public class CollectionReduceExamples {
 		System.out.printf("Summe: %1$d%n", sum);
 	}
 
+    @Tag("collections")
 	@Test
-	public void sumUpSingleElementCollection() {
+	void sumUpSingleElementCollection() {
 		List<Integer> integers = null;
 		int summe = 0;
 
@@ -114,8 +119,9 @@ public class CollectionReduceExamples {
 		assertThat(summe).isEqualTo(400);
 	}
 
+    @Tag("collections")
 	@Test
-	public void sumUpStringLength() {
+	void sumUpStringLength() {
 		List<String> strings = null;
 
 		strings = Arrays.asList("Andre", "Christine", "Adam", "Lars", "Erwin");
@@ -128,8 +134,9 @@ public class CollectionReduceExamples {
 				(Integer sum1, Integer sum2) -> sum1 + sum2).intValue()).isEqualTo(27);
 	}
 
+    @Tag("collections")
 	@Test
-	public void sumUpAllCollectionElementsAsOneLiner() {
+	void sumUpAllCollectionElementsAsOneLiner() {
 		var integers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
 		int sum = integers.stream().reduce((result, element) -> result + element).get();

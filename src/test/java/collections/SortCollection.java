@@ -28,7 +28,7 @@ public class SortCollection {
     @DisplayName("Example: Sort a collection with a Comparable.")
     @Tag("collections")
     @Test
-    public void sortCollectionWithComparable() {
+    void sortCollectionWithComparable() {
         List<Player> players = new ArrayList<>();
         players.addAll(List.of(Player.of(10), Player.of(5), Player.of(12), Player.of(1)));
         
