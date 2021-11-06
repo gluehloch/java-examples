@@ -21,6 +21,7 @@ public class MethodReference {
     }
 
     public static void calculate(MethodReference mr, Consumer<MethodReference> consumer) {
+        // Calculate something and put it to the consumer.
         consumer.accept(mr);
     }
 
