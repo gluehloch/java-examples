@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
  * @author Andre Winkler
  * @since  2018/2021
  */
-public class CollectionExamplesTest {
+class CollectionExamplesTest {
 
     public void joinStrings() {
         List<String> things = List.of("A", "B", "C", "D", "E");
