@@ -44,13 +44,8 @@ public class MethodReference {
         MethodReference.calculate(mr, new MrConsumerThis());
         MethodReference.calculate(mr, new MrConsumerThat());
 
-        MethodReference.calculate(mr, (p) -> {
-            p.addThis("this");
-        });
-
-        MethodReference.calculate(mr, (p) -> {
-            p.addThat("that");
-        });
+        MethodReference.calculate(mr, p -> p.addThis("this"));
+        MethodReference.calculate(mr, p -> p.addThat("that"));
     }
 
 }
