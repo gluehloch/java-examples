@@ -10,20 +10,13 @@ import java.util.function.Function;
  * @link https://8thlight.com/blog/brian-gerstle/2019/01/22/fnl-exceptions-in-java.html
  */
 public class Result<V, E extends Throwable> {
+
     private final V value;
     private final E error;
 
     private Result(V value, E error) {
         this.value = value;
         this.error = error;
-    }
-
-    public V value() {
-        return value;
-    }
-
-    public E error() {
-        return error;
     }
 
     public static <V, E extends Throwable> Result<V, E> failure(E error) {
