@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Java 8/9/10/11/12/13/14/15/16 Examples</name>
+	<name>Java 8/9/10/11/12/13/14/15/16/17 Examples</name>
 	<inceptionYear>2017</inceptionYear>
 
 	<build>
@@ -18,13 +18,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<release>16</release>
-				    <compilerArgs>--enable-preview</compilerArgs>
+					<compilerArgs>--enable-preview</compilerArgs>
 					<encoding>UTF-8</encoding>
-					<source>16</source>
-					<target>16</target>
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -71,7 +71,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<description>Java 8/9/10/11/12/13/14/15/16 examples</description>
+	<description>Java 8/9/10/11/12/13/14/15/16/17 examples</description>
 	<properties>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
