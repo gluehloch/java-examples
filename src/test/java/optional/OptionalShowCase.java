@@ -11,8 +11,8 @@ class OptionalShowCase {
 
 	@Test
 	void optionalReturnNull() {
-		assertThat(calculate("Andre").map(a -> "Winkler").orElse(null)).isEqualTo("Winkler");
-		assertThat(calculate("Lars").map(a -> "Winkler").orElse(null)).isEqualTo("Winkler");
+		assertThat(calculate("Andre").map(a -> "Winkler").orElse("empty")).isEqualTo("Winkler");
+		assertThat(calculate("Lars").map(a -> "Winkler").orElse("empty")).isEqualTo("empty");
 	}
 
 	@Test
@@ -28,6 +28,12 @@ class OptionalShowCase {
 
 		assertThat(empty).isEmpty();
 		empty.stream().map(i -> i.booleanValue());
+	}
+
+	@Test
+	void optionalMapOrElse() {
+		assertThat(Optional.of("AWTools").map(String::toUpperCase).orElse("empty")).isEqualTo("AWTOOLS");
+		assertThat(Optional.<String>empty().map(String::toUpperCase).orElse("empty")).isEqualTo("empty");
 	}
 
 	private Optional<String> calculate(String string) {
