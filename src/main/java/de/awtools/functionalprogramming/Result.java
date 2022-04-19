@@ -1,7 +1,5 @@
 package de.awtools.functionalprogramming;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -22,11 +20,11 @@ public class Result<V, E extends Throwable> {
         this.error = error;
     }
 
-    public static <V, E extends Throwable> Result<V, E> failure(E error) {
+    private static <V, E extends Throwable> Result<V, E> failure(E error) {
         return new Result<>(null, Objects.requireNonNull(error));
     }
 
-    public static <V, E extends Throwable> Result<V, E> success(V value) {
+    private static <V, E extends Throwable> Result<V, E> success(V value) {
         return new Result<>(Objects.requireNonNull(value), null);
     }
 
