@@ -57,22 +57,4 @@ public class Result<V, E extends Throwable> {
         return Optional.ofNullable(value).orElseThrow(() -> error);
     }
 
-    // ----
-
-    /**
-     * Get the API's base URL from the environment.
-     * 
-     * @return The URI, or null if the environment variable is missing.
-     */
-    URI apiBaseURLFromEnv() throws URISyntaxException {
-        Optional<Result<URI, URISyntaxException>> apiBaseURL = Optional.ofNullable(System.getenv("apiBaseURL"))
-                .map(urlString -> Result.attempt(() -> new URI(urlString)));
-
-        if (!apiBaseURL.isPresent()) {
-            return null;
-        }
-
-        return apiBaseURL.get().orElseThrow();
-    }
-
 }

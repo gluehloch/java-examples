@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class DateTimeTest {
+class DateTimeTest {
 
 	private static final String JTAG = "dateTime";
 
