@@ -41,17 +41,22 @@ class CollectionExamplesTest {
     @Tag("collections")
     @Test
     void createCollections() {
+        // List
         var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         System.out.println(integers2);
+        assertThat(integers2).contains(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
+        // Set
         var integers3 = Set.of(1, 2, 3, 5, 6, 7, 8);
         System.out.println(integers3);
+        assertThat(integers3).contains(1, 2, 3, 5, 6, 7, 8);
 
         // Map
         Map<String, Integer> map = Map.of("a", 1, "b", 2, "c", 3);
         var map2 = Map.of("a", 1, "b", 2, "c", 3);
         System.out.println(map);
         System.out.println(map2);
+        assertThat(map).containsAllEntriesOf(map2);
 
         Map<Integer, String> map3 = Map.ofEntries(entry(1, "Andre"), entry(2, "Lars"));
         System.out.println(map3);
