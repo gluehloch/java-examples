@@ -40,15 +40,16 @@ class SwitchCaseJdk17 {
         };
     }
 
-    static void testString(String s) {
+    static String testString(String s) {
         if (s == null) {
             System.out.println("Unknown!");
-            return;
+            return "Unknon!";
         }
-        switch (s) {
-        case "Java 11", "Java 17" -> System.out.println("LTS");
-        default -> System.out.println("Ok");
-        }
+
+        return switch (s) {
+        	case "Java 11", "Java 17" -> "LTS";
+        	default -> "Ok";
+        };
     }
 
     static void testStringJava17(String s) {
