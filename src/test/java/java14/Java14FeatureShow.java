@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
  */
 public class Java14FeatureShow {
 
-	String html = "<html>\n" + "   <body>\n" + "      <p>Hello, Text Blocks</p>\n" + "   </body>\n" + "</html>\n";
+	String html = "<html>\n" + "  <body>\n" + "    <p>Hello, Text Blocks</p>\n" + "  </body>\n" + "</html>\n";
 
 	String html2 = """
 			<html>
-			    <body>
+			  <body>
 			    <p>Hello, Text Blocks</p>
-			    </body>
+			  </body>
 			</html>""";
 
 	private static String statementBreak(int switchArg) {

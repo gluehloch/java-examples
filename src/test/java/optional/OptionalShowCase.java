@@ -13,6 +13,9 @@ class OptionalShowCase {
 	void optionalReturnNull() {
 		assertThat(calculate("Andre").map(a -> "Winkler").orElse("empty")).isEqualTo("Winkler");
 		assertThat(calculate("Lars").map(a -> "Winkler").orElse("empty")).isEqualTo("empty");
+
+		assertThat(calculate("Andre").map(a -> "Winkler").orElse(null)).isEqualTo("Winkler");
+		assertThat(calculate("Lars").map(a -> "Winkler").orElse(null)).isNull();
 	}
 
 	@Test

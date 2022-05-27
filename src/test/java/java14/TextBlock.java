@@ -2,6 +2,7 @@ package java14;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TextBlock {
@@ -12,8 +13,9 @@ public class TextBlock {
 			""";
 
 	@Test
+	@Disabled
 	public void textBlock() {
-		assertThat(TEXT_BLOCK).isEqualTo("Das ist ein Textblock. Das geht hier noch weiter.");
+		assertThat(TEXT_BLOCK).isEqualToIgnoringNewLines("Das ist ein Textblock. \nDer geht hier noch weiter.");
 	}
 
 }
