@@ -23,9 +23,8 @@ public class ReduceVersusCollectExamples {
 	 * TODO JDK 16/17. OutOfMemory. What is going on here? Maven executes this test
 	 * very well.
 	 */
-	@Disabled
 	@Test
-	public void joiningSomeStrings() {
+	void joiningSomeStrings() {
 		List<String> integers = integers(100);
 
 		long runtimeWithReduce = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithReduce);
