@@ -14,4 +14,9 @@ public class ExampleClass implements ExampleInterface<ExampleClass> {
 		return this;
 	}
 
+    @Override
+    public int compareTo(ExampleClass t) {
+        return 0;
+    }
+
 }

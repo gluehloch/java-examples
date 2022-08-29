@@ -15,5 +15,8 @@ public class ExceptionMessageFormatter {
     public static String format(Supplier<String> supplier, Object... args) {
         return format(supplier.get(), args);
     }
+    
+    private ExceptionMessageFormatter() {
+    }
 
 }
