@@ -69,4 +69,18 @@ public class InterfaceExpandingItselfExampleCode {
 		}
 	}
 
+	public class XxxClass implements InterfaceExpandingItself<AnotherClass> {
+		@Override
+		public InterfaceExpandingItself<AnotherClass> getSomeClass() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public AnotherClass self() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+
 }
