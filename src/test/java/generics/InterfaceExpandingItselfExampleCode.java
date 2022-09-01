@@ -43,6 +43,11 @@ public class InterfaceExpandingItselfExampleCode {
 		public AnotherClass self() {
 			return this;
 		}
+
+        @Override
+        public int compareTo(AnotherClass t) {
+            return 0;
+        }
 	}
 
 	public class AndAnotherClass implements InterfaceExpandingItself<AndAnotherClass> {
@@ -55,6 +60,11 @@ public class InterfaceExpandingItselfExampleCode {
 		public AndAnotherClass self() {
 			return this;
 		}
+
+        @Override
+        public int compareTo(AndAnotherClass t) {
+            return 0;
+        }
 	}
 
 	public class AnotherAnotherClass implements InterfaceExpandingItself<AnotherAnotherClass> {
@@ -67,6 +77,11 @@ public class InterfaceExpandingItselfExampleCode {
 		public AnotherAnotherClass self() {
 			return this;
 		}
+
+        @Override
+        public int compareTo(AnotherAnotherClass t) {
+            return 0;
+        }
 	}
 
 	public class XxxClass implements InterfaceExpandingItself<AnotherClass> {
@@ -81,6 +96,11 @@ public class InterfaceExpandingItselfExampleCode {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+        @Override
+        public int compareTo(AnotherClass t) {
+            return 0;
+        }
 	}
 
 }
