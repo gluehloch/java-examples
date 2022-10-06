@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SwitchCaseJdk17 {
 
     void switchCaseTestJdk17() {
-        String text = "";
+        var text = "";
 
         assertThat(formatterJava17("test")).isEqualTo("String test");
         assertThat(formatterJava17(111)).isEqualTo("int 111");
