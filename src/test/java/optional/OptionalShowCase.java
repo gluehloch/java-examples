@@ -47,4 +47,13 @@ class OptionalShowCase {
 		}
 	}
 
+	@Test
+	void ifPresentThrowExceptionOrElse() {
+		String string = "Andre";
+		Optional.of(string).ifPresentOrElse(
+			(a) -> new IllegalArgumentException(string + " is present")
+			,  () -> { var a = 0;}
+		);
+	}
+
 }
