@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-class OptionalShowCase {
+class OptionalShowCaseTest {
 
 	@Test
 	void optionalReturnNull() {
