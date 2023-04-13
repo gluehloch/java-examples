@@ -72,6 +72,8 @@ class DateTimeTest {
 		// 22.08.2016 14:30 Uhr
 		LocalDateTime ldt = LocalDateTime.of(2016, Month.AUGUST, 22, 14, 30);
 		System.out.println("LocalDateTime : " + airportDateTimeFormat.format(ldt));
+		ZonedDateTime ldtEuropeBerlin = ldt.atZone(EUROPE_BERLIN);
+		System.out.println("at Zone Europe: " + airportDateTimeFormat.format(ldtEuropeBerlin));
 
 		// UTC+8
 		ZonedDateTime klDateTime = ldt.atZone(ASIA_KUALA_LUMPUR);
@@ -79,9 +81,16 @@ class DateTimeTest {
 
 		// UTC+9 and flight duration = 7 hours => #withZomeSameInstant vs. #atZone
 		ZonedDateTime japanDateTime = klDateTime.withZoneSameInstant(ASIA_TOKYO).plusHours(7);
-		System.out.println("Arrive +7 hours at Tokyo and Kuala Lumpur timezone: "
+
+		System.out.println("Arrive +7 hours and Tokyo timezone: "
+				+ airportDateTimeFormat.format(japanDateTime));
+		System.out.println("Arrive +7 hours and Kuala Lumpur timezone: "
 				+ airportDateTimeFormat.format(klDateTime.plusHours(7)));
-		System.out.println("Arrive +7 hours and Tokyo timezone: " + airportDateTimeFormat.format(japanDateTime));
+
+		ZonedDateTime kualaLumpurDateTime = klDateTime.withZoneSameInstant(ASIA_KUALA_LUMPUR).plusHours(7);
+		System.out.println("Arrive +7 hours at Kuala Lumpur timezone: "
+				+ airportDateTimeFormat.format(kualaLumpurDateTime));
+
 
 		System.out.println("\n---Detail---");
 		System.out.println("Depart : " + klDateTime);
