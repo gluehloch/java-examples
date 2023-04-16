@@ -88,6 +88,7 @@ class SwitchCaseJdk17 {
         }
     }
 
+    /* TODO Preview feature. Currently disabled.
     static void testTriangle2(Shape s) {
         switch (s) {
             case null ->
@@ -100,5 +101,6 @@ class SwitchCaseJdk17 {
                     System.out.println("Unknown!");
         }
     }
+    */
 
 }
