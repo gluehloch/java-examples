@@ -21,7 +21,7 @@ class OptionalAssertionsTest {
 
         assertThat(Optional.of("TEST")).isPresent()
                 .containsInstanceOf(String.class)
-                .contains("Test");
+                .contains("TEST");
 
         String someString = "something";
         assertThat(Optional.of(someString)).containsSame(someString);

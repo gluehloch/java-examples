@@ -91,12 +91,11 @@ class SwitchCaseJdk17 {
     /* TODO Preview feature. Currently disabled.
     static void testTriangle2(Shape s) {
         switch (s) {
-            case null ->
-                    {}
-            case Triangle t && (t.calculateArea() > 100) ->
-                    System.out.println("Large triangle");
+            case null -> System.out.println("NULL-String");
+            //case Triangle t && (t.calculateArea() > 100) ->
+            //        System.out.println("Large triangle");
             case Triangle t ->
-                    System.out.println("Triangle");
+                    System.out.println("Triangle: " + t.toString());
             default ->
                     System.out.println("Unknown!");
         }
