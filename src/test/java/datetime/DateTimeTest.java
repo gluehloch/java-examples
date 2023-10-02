@@ -2,6 +2,7 @@ package datetime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
@@ -23,6 +24,29 @@ class DateTimeTest {
 	private static final ZoneId EUROPE_BERLIN = ZoneId.of("Europe/Berlin");
 	private static final ZoneId ASIA_KUALA_LUMPUR = ZoneId.of("Asia/Kuala_Lumpur");
 	private static final ZoneId ASIA_TOKYO = ZoneId.of("Asia/Tokyo");
+
+	@Tag(JTAG)
+    @Test
+    void javaDateTime() {
+        ZoneId utcZone = ZoneId.of("UTC");
+        assertThat(utcZone).isNotNull();
+
+        ZoneId zZone = ZoneId.of("Z");
+        assertThat(zZone).isNotNull();
+        assertThat(utcZone.normalized()).isEqualTo(zZone);
+
+        ZoneId europeBerlin = ZoneId.of("Europe/Berlin");
+        assertThat(europeBerlin).isNotNull();
+        assertThat(europeBerlin.normalized()).isEqualTo(europeBerlin);
+                
+        var now = Instant.now();
+        
+        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(utcZone).format(now));
+        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z").withZone(utcZone).format(now));
+        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z").withZone(europeBerlin).format(now));
+        System.out.println(DateTimeFormatter.ISO_INSTANT.withZone(europeBerlin).format(now));
+        System.out.println(DateTimeFormatter.ISO_DATE_TIME.withZone(europeBerlin).format(now));
+    }
 
 	@Tag(JTAG)
 	@Test
