@@ -92,12 +92,20 @@ class DateTimeTest {
 	@Test
 	void zoneDateTime() {
 		DateTimeFormatter airportDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter airportDateTimeFormatWithZone = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm Z");
 
 		// 22.08.2016 14:30 Uhr
 		LocalDateTime ldt = LocalDateTime.of(2016, Month.AUGUST, 22, 14, 30);
 		System.out.println("LocalDateTime : " + airportDateTimeFormat.format(ldt));
-		ZonedDateTime ldtEuropeBerlin = ldt.atZone(EUROPE_BERLIN);
-		System.out.println("at Zone Europe: " + airportDateTimeFormat.format(ldtEuropeBerlin));
+		ZonedDateTime zonedEuropeBerlin = ldt.atZone(EUROPE_BERLIN);
+		System.out.println("at Zone Europe (with Zone): " + airportDateTimeFormatWithZone.format(zonedEuropeBerlin));
+		System.out.println("at Zone Europe: " + airportDateTimeFormat.format(zonedEuropeBerlin));
+
+		LocalDateTime localDateTime = zonedEuropeBerlin.toLocalDateTime();
+		System.out.println("LocalDateTime : " + airportDateTimeFormat.format(localDateTime));
+		assertThat(localDateTime.getHour()).isEqualTo(14);
+		assertThat(localDateTime.getMinute()).isEqualTo(30);
+		assertThat(localDateTime.getSecond()).isEqualTo(0);
 
 		// UTC+8
 		ZonedDateTime klDateTime = ldt.atZone(ASIA_KUALA_LUMPUR);
