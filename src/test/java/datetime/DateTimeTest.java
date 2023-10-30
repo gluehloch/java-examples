@@ -10,6 +10,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import de.awtools.datetime.DateTimeUtils;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -127,6 +128,22 @@ class DateTimeTest {
 		System.out.println("\n---Detail---");
 		System.out.println("Depart : " + klDateTime);
 		System.out.println("Arrive : " + japanDateTime);
+	}
+
+	@Tag(JTAG)
+	@Test
+	void parseDateTime() {
+		var zoneEuropeBerlin = ZoneId.of("Europe/Berlin");
+		var date = "2011-03-24T06:34:11+01:00[Europe/Berlin]";
+		ZonedDateTime zdt = (ZonedDateTime) DateTimeUtils.toDateTimeWithOptionalOffsetAndTimeZoneId(date, zoneEuropeBerlin);
+		assertThat(zdt.getZone()).isEqualTo(zoneEuropeBerlin);
+		assertThat(zdt.getYear()).isEqualTo(2011);
+		assertThat(zdt.getMonthValue()).isEqualTo(3);
+		assertThat(zdt.getDayOfMonth()).isEqualTo(24);
+		assertThat(zdt.getHour()).isEqualTo(6);
+		assertThat(zdt.getMinute()).isEqualTo(34);
+		assertThat(zdt.getSecond()).isEqualTo(11);
+		assertThat(zdt.getOffset()).isEqualTo(ZoneOffset.of("+01"));
 	}
 
 }
