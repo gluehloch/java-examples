@@ -53,4 +53,44 @@ public class StreamExamples {
         List<String> list3 = listOfLists.stream().flatMap(Collection::stream).map(String::toLowerCase).toList();
         assertThat(list3).containsExactlyInAnyOrder("andre", "lars", "adam", "erwin", "christine");
     }
+
+    @DisplayName("Example: Stream grouping to map")
+    @Tag("streams")
+    @Test
+    void streamGroupingToMap() {
+        List<Pair> pairs = List.of(
+            Pair.of("a", "1"),
+            Pair.of("a", "2"),
+            Pair.of("b", "3"),
+            Pair.of("b", "4"));
+
+        Map<String, List<Pair>> x = pairs.stream().collect(Collectors.groupingBy(Pair::getKey));
+        assertThat(x).hasSize(2);
+        assertThat(x.get("a")).hasSize(2);
+        assertThat(x.get("b")).hasSize(2);
+        assertThat(x.get("a").get(0).getValue()).isEqualTo("1");
+        assertThat(x.get("a").get(1).getValue()).isEqualTo("2");
+        assertThat(x.get("b").get(0).getValue()).isEqualTo("3");
+        assertThat(x.get("b").get(1).getValue()).isEqualTo("4");
+    }
+
+    private static class Pair {
+        private final String key;
+        private final String value;
+
+        public static Pair of(String key, String value) {
+            return new Pair(key, value);
+        }
+        private Pair(String key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+        public String getKey() {
+            return key;
+        }
+        public String getValue() {
+            return value;
+        }
+    }
+
 }
