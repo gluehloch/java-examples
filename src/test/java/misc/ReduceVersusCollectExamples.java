@@ -39,7 +39,6 @@ public class ReduceVersusCollectExamples {
 	}
 
 	private long runtime(Stream<String> stream, Function<Stream<String>, String> streamFunction) {
-
 		System.out.println("Memory:" + Runtime.getRuntime().maxMemory());
 
 		LocalDateTime start = LocalDateTime.now();
