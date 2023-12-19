@@ -19,46 +19,46 @@ import org.junit.jupiter.api.Test;
  */
 public class ReduceVersusCollectExamples {
 
-	@Test
-	void joiningSomeStrings() {
-		List<String> integers = integers(100);
+    @Test
+    void joiningSomeStrings() {
+        List<String> integers = integers(100);
 
-		long runtimeWithReduce = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithReduce);
-		System.out.println("Runtime reduce seconds: " + runtimeWithReduce);
+        long runtimeWithReduce = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithReduce);
+        System.out.println("Runtime reduce seconds: " + runtimeWithReduce);
 
-		long runtimeWithCollect = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithCollect);
-		System.out.println("Runtime collect seconds: " + runtimeWithCollect);
-	}
+        long runtimeWithCollect = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithCollect);
+        System.out.println("Runtime collect seconds: " + runtimeWithCollect);
+    }
 
-	public static String joinWithReduce(Stream<String> stream) {
-		return stream.reduce(new StringBuffer(), StringBuffer::append, StringBuffer::append).toString();
-	}
+    public static String joinWithReduce(Stream<String> stream) {
+        return stream.reduce(new StringBuffer(), StringBuffer::append, StringBuffer::append).toString();
+    }
 
-	public static String joinWithCollect(Stream<String> stream) {
-		return stream.collect(() -> new StringBuilder(), StringBuilder::append, StringBuilder::append).toString();
-	}
+    public static String joinWithCollect(Stream<String> stream) {
+        return stream.collect(() -> new StringBuilder(), StringBuilder::append, StringBuilder::append).toString();
+    }
 
-	private long runtime(Stream<String> stream, Function<Stream<String>, String> streamFunction) {
-		System.out.println("Memory:" + Runtime.getRuntime().maxMemory());
+    private long runtime(Stream<String> stream, Function<Stream<String>, String> streamFunction) {
+        System.out.println("Memory:" + Runtime.getRuntime().maxMemory());
 
-		LocalDateTime start = LocalDateTime.now();
-		String joinReduce = streamFunction.apply(stream);
-		System.out.println("Length: " + joinReduce.length());
-		LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = LocalDateTime.now();
+        String joinReduce = streamFunction.apply(stream);
+        System.out.println("Length: " + joinReduce.length());
+        LocalDateTime end = LocalDateTime.now();
 
-		System.out.println("Memory:" + Runtime.getRuntime().maxMemory());
+        System.out.println("Memory:" + Runtime.getRuntime().maxMemory());
 
-		long seconds = ChronoUnit.MILLIS.between(start, end);
-		return seconds;
-	}
+        long seconds = ChronoUnit.MILLIS.between(start, end);
+        return seconds;
+    }
 
-	private List<String> integers(int nums) {
-		Random random = new Random();
-		List<String> integers = new ArrayList<>();
-		for (int i = 0; i < nums; i++) {
-			integers.add(Integer.toString(random.nextInt()));
-		}
-		return integers;
-	}
+    private List<String> integers(int nums) {
+        Random random = new Random();
+        List<String> integers = new ArrayList<>();
+        for (int i = 0; i < nums; i++) {
+            integers.add(Integer.toString(random.nextInt()));
+        }
+        return integers;
+    }
 
 }

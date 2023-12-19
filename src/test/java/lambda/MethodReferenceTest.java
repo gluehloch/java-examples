@@ -15,8 +15,8 @@ public class MethodReferenceTest {
     @Test
     void methodReferenceWithLambda() {
         MethodReference mr = new MethodReference();
-        MethodReference.calculate(mr, (p) -> p.addThat("that"));
-        MethodReference.calculate(mr, (p) -> p.addThis("this"));
+        MethodReference.calculate(mr, p -> p.addThat("that"));
+        MethodReference.calculate(mr, p -> p.addThis("this"));
         
         assertThat(mr.getStrings()).containsExactly("that", "this");
     }

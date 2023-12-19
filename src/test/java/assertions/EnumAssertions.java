@@ -35,4 +35,5 @@ class EnumAssertions {
         assertThat(Status.INACTIVE.getDeclaringClass()).isEqualTo(Status.class);
         assertThat(Status.INACTIVE.toString()).isEqualTo("INACTIVE");
     }
+
 }
