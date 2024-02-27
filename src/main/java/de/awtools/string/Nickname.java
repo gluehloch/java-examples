@@ -10,6 +10,10 @@ public class Nickname implements CharSequence {
         this.value = Objects.requireNonNull(value);
     }
 
+    public static Nickname of(String value) {
+        return new Nickname(value);
+    }
+
     @Override
     public int length() {
         return value.length();
