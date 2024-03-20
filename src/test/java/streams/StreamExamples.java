@@ -51,6 +51,19 @@ public class StreamExamples {
         assertThat(filteredList4).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
     }
 
+    @DisplayName("Example: Stream")
+    @Tag("streams")
+    @Test
+    void flatMapOfStream() {
+        List<String> list1 = List.of("Andre", "Lars");
+        List<String> list2 = List.of("Adam", "Erwin");
+        List<String> list3 = List.of("Christine");
+        List<String> list4 = List.of("Ernie", "Bert");
+        List<List<String>> list = List.of(list1, list2, list3, list4);
+        assertThat(list.stream().flatMap(Collection::stream).toList())
+                .containsExactlyInAnyOrder("Andre", "Christine", "Adam", "Lars", "Erwin", "Ernie", "Bert");
+    }
+
     @DisplayName("Example: Stream to list")
     @Tag("streams")
     @Test
