@@ -34,7 +34,7 @@ public class ReduceVersusCollectExamples {
     }
 
     public static String joinWithCollect(Stream<String> stream) {
-        return stream.collect(() -> new StringBuilder(), StringBuilder::append, StringBuilder::append).toString();
+        return stream.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
     }
 
     private long runtime(Stream<String> stream, Function<Stream<String>, String> streamFunction) {
