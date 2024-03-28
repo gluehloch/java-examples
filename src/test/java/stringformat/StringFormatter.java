@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import de.awtools.string.Nickname;
+import de.awtools.string.UserService;
+
 class StringFormatter {
 
 	/**
@@ -24,6 +27,12 @@ class StringFormatter {
 	void formatter() {
 		String str = format(() -> "string {}", "string");
 		assertThat(str).isEqualTo("string string");
+	}
+
+	@Test
+	void string() {
+		UserService userService = new UserService();
+		userService.addUser(Nickname.of("Nickname"));
 	}
 
 //	public String getString(String test) {

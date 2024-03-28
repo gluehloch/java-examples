@@ -9,11 +9,60 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StreamExamples {
+
+    @DisplayName("Example: Filter stream of optionals.")
+    @Tag("streams")
+    @Test
+    void filterOptionalStream() {
+        List<Optional<String>> listOfOptionals = List.of(
+                Optional.of("Andre"),
+                Optional.of("Christine"),
+                Optional.of("Adam"),
+                Optional.of("Lars"),
+                Optional.empty(),
+                Optional.of("Erwin"));
+        List<String> filteredList = listOfOptionals.stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
+        assertThat(filteredList).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+
+        List<String> filteredList2 = listOfOptionals.stream()
+                .flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty())
+                .toList();
+        assertThat(filteredList2).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+
+        List<String> filteredList3 = listOfOptionals.stream()
+                .flatMap(o -> o.map(Stream::of).orElseGet(Stream::empty))
+                .toList();
+        assertThat(filteredList3).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+
+        // Java 9
+        List<String> filteredList4 = listOfOptionals.stream()
+                .flatMap(Optional::stream)
+                .toList();
+        assertThat(filteredList4).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+    }
+
+    @DisplayName("Example: Stream")
+    @Tag("streams")
+    @Test
+    void flatMapOfStream() {
+        List<String> list1 = List.of("Andre", "Lars");
+        List<String> list2 = List.of("Adam", "Erwin");
+        List<String> list3 = List.of("Christine");
+        List<String> list4 = List.of("Ernie", "Bert");
+        List<List<String>> list = List.of(list1, list2, list3, list4);
+        assertThat(list.stream().flatMap(Collection::stream).toList())
+                .containsExactlyInAnyOrder("Andre", "Christine", "Adam", "Lars", "Erwin", "Ernie", "Bert");
+    }
 
     @DisplayName("Example: Stream to list")
     @Tag("streams")
