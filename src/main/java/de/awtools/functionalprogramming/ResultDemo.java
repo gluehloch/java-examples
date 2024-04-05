@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Function;
 
 import de.awtools.functionalprogramming.Result.CheckedSupplier;
 
@@ -22,7 +23,6 @@ public class ResultDemo {
     }
 
     private static class MyCheckedSupplier implements CheckedSupplier<File, Exception> {
-
         @Override
         public File get() throws IOException {
             String tmpdir = System.getProperty("java.io.tmpdir");
@@ -33,7 +33,6 @@ public class ResultDemo {
 
             return temp.toFile();
         }
-
     }
 
 }

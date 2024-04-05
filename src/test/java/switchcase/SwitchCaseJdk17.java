@@ -95,7 +95,7 @@ class SwitchCaseJdk17 {
             //case Triangle t && (t.calculateArea() > 100) ->
             //        System.out.println("Large triangle");
             case Triangle t ->
-                    System.out.println("Triangle: " + t.toString());
+                    System.out.println("Triangle: " + t);
             default ->
                     System.out.println("Unknown!");
         }
