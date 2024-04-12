@@ -26,10 +26,10 @@ public class ResultDemo {
         @Override
         public File get() throws IOException {
             String tmpdir = System.getProperty("java.io.tmpdir");
-            System.out.println("Temp file path: " + tmpdir);
+            System.out.println(STR."Temp file path: \{tmpdir}");
 
             Path temp = Files.createTempFile("awtools", ".txt");
-            System.out.println("Temp file : " + temp);
+            System.out.println(STR."Temp file : \{temp}");
 
             return temp.toFile();
         }
