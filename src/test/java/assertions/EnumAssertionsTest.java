@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class EnumAssertions {
+class EnumAssertionsTest {
 
     public static enum Status {
         ACTIVE, INACTIVE

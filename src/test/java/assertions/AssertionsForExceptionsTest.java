@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.Test;
 
-class AssertionsForExceptions {
+class AssertionsForExceptionsTest {
 
     @Test
     void validateThatException() {
