@@ -33,10 +33,10 @@ class SwitchCaseJdk17 {
     static String formatterJava17(Object o) {
         return switch (o) {
             case Integer i -> String.format("int %d", i);
-            case Long l    -> String.format("long %d", l);
-            case Double d  -> String.format("double %f", d);
-            case String s  -> String.format("String %s", s);
-            default        -> o.toString();
+            case Long l -> String.format("long %d", l);
+            case Double d -> String.format("double %f", d);
+            case String s -> String.format("String %s", s);
+            default -> o.toString();
         };
     }
 
@@ -47,16 +47,16 @@ class SwitchCaseJdk17 {
         }
 
         return switch (s) {
-        	case "Java 11", "Java 17" -> "LTS";
-        	default -> "Ok";
+            case "Java 11", "Java 17" -> "LTS";
+            default -> "Ok";
         };
     }
 
     static void testStringJava17(String s) {
         switch (s) {
-        case null -> System.out.println("Unknown!");
-        case "Java 11", "Java 17" -> System.out.println("LTS");
-        default -> System.out.println("Ok");
+            case null -> System.out.println("Unknown!");
+            case "Java 11", "Java 17" -> System.out.println("LTS");
+            default -> System.out.println("Ok");
         }
     }
 
@@ -80,7 +80,7 @@ class SwitchCaseJdk17 {
                 if (t.calculateArea() > 100) {
                     System.out.println("Large triangle");
                     break;
-                }else{
+                } else {
                     System.out.println("Triangle");
                 }
             default:
@@ -94,10 +94,8 @@ class SwitchCaseJdk17 {
             case null -> System.out.println("NULL-String");
             //case Triangle t && (t.calculateArea() > 100) ->
             //        System.out.println("Large triangle");
-            case Triangle t ->
-                    System.out.println("Triangle: " + t);
-            default ->
-                    System.out.println("Unknown!");
+            case Triangle t -> System.out.println("Triangle: " + t);
+            default -> System.out.println("Unknown!");
         }
     }
 
