@@ -41,6 +41,12 @@ class ListAssert {
 				tuple("Winkler", "Adam"),
 				tuple("Winkler", "Lars"),
 				tuple("Winkler", "Erwin"));
+
+		assertThat(list).extracting( Person::getName, Person::getFirstName).containsOnly(
+				tuple("Winkler", "Andre"),
+				tuple("Winkler", "Adam"),
+				tuple("Winkler", "Lars"),
+				tuple("Winkler", "Erwin"));
 	}
 
 	private static class Person {
