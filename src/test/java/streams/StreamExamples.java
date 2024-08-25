@@ -1,6 +1,5 @@
 package streams;
 
-import static java.util.function.identity;
 import static java.util.function.Function.identity;
 
 import org.junit.jupiter.api.DisplayName;
