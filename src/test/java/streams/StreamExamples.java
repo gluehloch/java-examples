@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StreamExamples {
 
+    public static final String[] WINKLERS = {"Andre", "Christine", "Adam", "Lars", "Erwin"};
+
     @DisplayName("Example: Filter stream of optionals.")
     @Tag("streams")
     @Test
@@ -32,23 +34,38 @@ public class StreamExamples {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList();
-        assertThat(filteredList).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+        assertThat(filteredList).containsExactly(WINKLERS);
 
         List<String> filteredList2 = listOfOptionals.stream()
+                .flatMap(o -> o.stream().flatMap(Stream::of))
+                .toList();
+        assertThat(filteredList2).containsExactly(WINKLERS);
+
+        List<String> filteredList21 = listOfOptionals.stream()
                 .flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty())
                 .toList();
-        assertThat(filteredList2).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+        assertThat(filteredList21).containsExactly(WINKLERS);
 
         List<String> filteredList3 = listOfOptionals.stream()
                 .flatMap(o -> o.map(Stream::of).orElseGet(Stream::empty))
                 .toList();
-        assertThat(filteredList3).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+        assertThat(filteredList3).containsExactly(WINKLERS);
 
         // Java 9
         List<String> filteredList4 = listOfOptionals.stream()
                 .flatMap(Optional::stream)
                 .toList();
-        assertThat(filteredList4).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin");
+        assertThat(filteredList4).containsExactly(WINKLERS);
+    }
+
+    @DisplayName("Example: Optional map vs flatMap")
+    @Tag("streams")
+    @Test
+    void flatMap() {
+        Optional<String> name = Optional.of("Andre").map(String::toUpperCase);
+        String name2 = Optional.of("Andre").flatMap(String::toUpperCase);
+
+        assertThat(Optional.of("Andre").map(String::toUpperCase).orElse("")).isEqualTo("ANDRE");
     }
 
     @DisplayName("Example: Stream")
