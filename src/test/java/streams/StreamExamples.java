@@ -63,9 +63,9 @@ public class StreamExamples {
     @Test
     void flatMap() {
         Optional<String> name = Optional.of("Andre").map(String::toUpperCase);
-        String name2 = Optional.of("Andre").flatMap(String::toUpperCase);
-
         assertThat(Optional.of("Andre").map(String::toUpperCase).orElse("")).isEqualTo("ANDRE");
+        String name2 = Optional.of("Andre").flatMap(s -> Optional.of(s.toUpperCase())).orElse("");
+        // String name2 = Optional.of("Andre").flatMap(String::toUpperCase);
     }
 
     @DisplayName("Example: Stream")
