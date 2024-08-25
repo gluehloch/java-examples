@@ -48,6 +48,30 @@ class ListAssert {
 				tuple("Winkler", "Lars"),
 				tuple("Winkler", "Erwin"));
 	}
+	
+    @Test
+    void assertJListExample() {
+        final Person a = Person.of("Doe", "John");
+        final Person b = Person.of("Smith", "Jane");
+        final Person c = Person.of("Brown", "Charlie");
+
+        final List<Person> list = List.of(a, b, c);
+
+        // Check if the list contains specific elements
+        assertThat(list).contains(a, b);
+
+        // Check if the list contains specific elements in the given order
+        assertThat(list).containsExactly(a, b, c);
+
+        // Check if the list contains only the specified elements
+        assertThat(list).containsOnly(a, b, c);
+
+        // Check if the list contains elements with specific properties
+        assertThat(list).extracting("name", "firstName").contains(
+                tuple("Doe", "John"),
+                tuple("Smith", "Jane"),
+                tuple("Brown", "Charlie"));
+    }
 
 	private static class Person {
 		public String name;
