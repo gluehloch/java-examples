@@ -1,5 +1,6 @@
 package streams;
 
+import static java.util.function.identity;
 import static java.util.function.Function.identity;
 
 import org.junit.jupiter.api.DisplayName;
@@ -140,6 +141,19 @@ public class StreamExamples {
         public String getValue() {
             return value;
         }
+    }
+
+    @DisplayName("Example: Stream grouping to map by length")
+    @Tag("streams")
+    @Test
+    void streamGroupingByLength() {
+        List<String> list = List.of("Andre", "Lars", "Adam", "Erwin", "Christine");
+
+        Map<Integer, List<String>> groupedByLength = list.stream().collect(Collectors.groupingBy(String::length));
+
+        assertThat(groupedByLength.get(4)).containsExactlyInAnyOrder("Lars", "Adam");
+        assertThat(groupedByLength.get(5)).containsExactlyInAnyOrder("Andre", "Erwin");
+        assertThat(groupedByLength.get(9)).containsExactly("Christine");
     }
 
 }
