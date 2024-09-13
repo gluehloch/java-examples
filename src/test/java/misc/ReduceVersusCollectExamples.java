@@ -23,10 +23,10 @@ public class ReduceVersusCollectExamples {
         List<String> integers = integers(10); // TODO bei einem Wert von über 100 gibt es hier eine OutOfMemoryException
 
         long runtimeWithReduce = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithReduce);
-        System.out.println(STR."Runtime reduce seconds: \{runtimeWithReduce}");
+        System.out.println("Runtime reduce seconds: %d".formatted(runtimeWithReduce));
 
         long runtimeWithCollect = runtime(integers.parallelStream(), ReduceVersusCollectExamples::joinWithCollect);
-        System.out.println(STR."Runtime collect seconds: \{runtimeWithCollect}");
+        System.out.println("Runtime collect seconds: %d".formatted(runtimeWithCollect));
     }
 
     public static String joinWithReduce(Stream<String> stream) {
@@ -38,14 +38,14 @@ public class ReduceVersusCollectExamples {
     }
 
     private long runtime(Stream<String> stream, Function<Stream<String>, String> streamFunction) {
-        System.out.println(STR."Memory:\{Runtime.getRuntime().maxMemory()}");
+        System.out.println("Memory: %d".formatted(Runtime.getRuntime().maxMemory()));
 
         LocalDateTime start = LocalDateTime.now();
         String joinReduce = streamFunction.apply(stream);
-        System.out.println(STR."Length: \{joinReduce.length()}");
+        System.out.println("Length: %d".formatted(joinReduce.length()));
         LocalDateTime end = LocalDateTime.now();
 
-        System.out.println(STR."Memory:\{Runtime.getRuntime().maxMemory()}");
+        System.out.println("Memory: %d".formatted(Runtime.getRuntime().maxMemory()));
 
         long seconds = ChronoUnit.MILLIS.between(start, end);
         return seconds;

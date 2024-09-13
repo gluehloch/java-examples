@@ -140,4 +140,15 @@ class CollectionExamplesTest {
         // .withMessage("%s", "kaputt");
     }
 
+    @Tag("collections")
+    @Test
+    void findAllElementsWhichArePartOfAnotherCollection() {
+        var integers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        assertThat(integers).containsAll(integers2);
+
+        var integers3 = integers.stream().filter(integers2::contains).toList();
+        assertThat(integers2).containsExactlyElementsOf(integers3);
+    }
 }
