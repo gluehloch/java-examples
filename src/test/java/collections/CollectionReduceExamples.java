@@ -90,7 +90,7 @@ public class CollectionReduceExamples {
 		assertThat(summe).isEqualTo(100);
 
 		integers = Arrays.asList(100);
-		summe = integers.stream().reduce(0, (result, element) -> result + element);
+		summe = integers.stream().reduce(0, Integer::sum);
 		assertThat(summe).isEqualTo(100);
 
 		summe = integers.stream().reduce((result, element) -> result + 4711 + element).get();
