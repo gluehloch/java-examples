@@ -6,10 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -95,6 +92,9 @@ public class StreamExamples {
         /* Between JDK 8 - 15 */
         List<String> list3 = list.stream().collect(Collectors.toList());
         assertThat(list3).containsExactly(array);
+        // ... geht natürlich auch so ...
+        List<String> list4 = new ArrayList<>(list);
+        assertThat(list4).containsExactly(array);
     }
 
     @DisplayName("Example: Stream to Map")
