@@ -172,4 +172,17 @@ public class StreamExamples {
         assertThat(groupedByLength.get(9)).containsExactly("Christine");
     }
 
+    @DisplayName("Example: Parallel stream")
+    @Tag("streams")
+    @Test
+    void parallelStream() {
+        List<String> list = List.of("Andre", "Lars", "Adam", "Erwin", "Christine");
+
+        Map<Integer, List<String>> groupedByLength = list.parallelStream().collect(Collectors.groupingBy(String::length));
+
+        assertThat(groupedByLength.get(4)).containsExactlyInAnyOrder("Lars", "Adam");
+        assertThat(groupedByLength.get(5)).containsExactlyInAnyOrder("Andre", "Erwin");
+        assertThat(groupedByLength.get(9)).containsExactly("Christine");
+    }
+
 }
