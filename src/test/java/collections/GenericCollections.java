@@ -12,8 +12,10 @@ import org.junit.jupiter.api.Test;
  * 
  * PECS stands for producer-extends, consumer-super.
  *
- * Was bedeutet das? Die Begrifflichkeit ist eher verwirrend. 'extends' scheint dann sinnvoll zu sein, wenn die Methode
- * die Elemente aus der Collection verarbeitet, ohne die Collection selbst zu veraendern.
+ * Was bedeutet das? Die Begrifflichkeit ist eher verwirrend. 'extends' scheint
+ * dann sinnvoll zu sein, wenn die Methode
+ * die Elemente aus der Collection verarbeitet, ohne die Collection selbst zu
+ * veraendern.
  * 
  * @author winkler
  */
@@ -69,7 +71,8 @@ public class GenericCollections {
     }
 
     /**
-     * Ist das ein Consumer oder ein Producer? Da extends hier sinnvoll ist, muss es sich um einen Producer handeln.
+     * Ist das ein Consumer oder ein Producer? Da extends hier sinnvoll ist, muss es
+     * sich um einen Producer handeln.
      *
      * @param doits
      */

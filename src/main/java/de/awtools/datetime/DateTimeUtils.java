@@ -15,10 +15,10 @@ public class DateTimeUtils {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
                 .append(DateTimeFormatter.ISO_LOCAL_DATE)
-                .optionalStart()           // time made optional
+                .optionalStart() // time made optional
                 .appendLiteral('T')
                 .append(DateTimeFormatter.ISO_LOCAL_TIME)
-                .optionalStart()           // zone and offset made optional
+                .optionalStart() // zone and offset made optional
                 .appendOffsetId()
                 .optionalStart()
                 .appendLiteral('[')
@@ -30,7 +30,8 @@ public class DateTimeUtils {
                 .optionalEnd()
                 .toFormatter();
 
-        TemporalAccessor temporalAccessor = formatter.parseBest(value, ZonedDateTime::from, LocalDateTime::from, LocalDate ::from);
+        TemporalAccessor temporalAccessor = formatter.parseBest(value, ZonedDateTime::from, LocalDateTime::from,
+                LocalDate::from);
         if (temporalAccessor instanceof ZonedDateTime) {
             return ((ZonedDateTime) temporalAccessor);
         }

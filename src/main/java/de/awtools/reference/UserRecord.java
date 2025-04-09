@@ -2,7 +2,7 @@ package de.awtools.reference;
 
 import java.util.Objects;
 
-public record UserRecord(Long id, TaxId taxId, String name, String surname) implements Reference<TaxId , UserRecord> {
+public record UserRecord(Long id, TaxId taxId, String name, String surname) implements Reference<TaxId, UserRecord> {
 
     public String toMessage() {
         return String.format("UserRecord=[%s, %s]", name, surname);
@@ -20,7 +20,8 @@ public record UserRecord(Long id, TaxId taxId, String name, String surname) impl
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof UserRecord)) return false;
+        if (!(obj instanceof UserRecord))
+            return false;
         UserRecord ur = (UserRecord) obj;
         return ur.taxId().equals(this.taxId());
     }

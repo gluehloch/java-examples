@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import de.awtools.functionalprogramming.Result.CheckedSupplier;
 
 public class ResultDemo {
-    
+
     public void start() {
         Result<File, Exception> result = Result.attempt(new MyCheckedSupplier());
         result.map(file -> {

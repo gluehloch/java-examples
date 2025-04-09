@@ -37,7 +37,7 @@ public class UserEntity {
         public UserReference(TaxId taxId) {
             this.taxId = taxId;
         }
-        
+
         public TaxId getTaxId() {
             return taxId;
         }

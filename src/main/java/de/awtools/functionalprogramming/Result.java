@@ -7,7 +7,7 @@ import java.util.function.Function;
 /**
  * {@link "https://8thlight.com/blog/brian-gerstle/2019/01/22/fnl-exceptions-in-java.html"}
  *
- * @param <V> the result type 
+ * @param <V> the result type
  * @param <E> an exception
  */
 public class Result<V, E extends Throwable> {

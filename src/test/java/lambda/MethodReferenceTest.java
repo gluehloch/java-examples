@@ -17,8 +17,8 @@ public class MethodReferenceTest {
         MethodReference mr = new MethodReference();
         MethodReference.calculate(mr, p -> p.addThat("that"));
         MethodReference.calculate(mr, p -> p.addThis("this"));
-        
+
         assertThat(mr.getStrings()).containsExactly("that", "this");
     }
-    
+
 }

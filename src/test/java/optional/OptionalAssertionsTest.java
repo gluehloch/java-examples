@@ -37,12 +37,12 @@ class OptionalAssertionsTest {
         assertThat(Optional.of(legolas)).satisfiesAnyOf(tc -> then(tc).isEmpty(),
                 tc -> then(tc.get().getRace()).isEqualTo(Race.ELF));
         assertThat(Optional.empty()).satisfiesAnyOf(tc -> then(tc).isEmpty(), tc -> then(true).isFalse());
-        
+
         assertThat(Optional.of(legolas)).get().isNotNull();
 
         Optional<String> optional = Optional.of("Frodo");
 
-        assertThat(optional).get(as(STRING)).startsWith("Fro");        
+        assertThat(optional).get(as(STRING)).startsWith("Fro");
     }
 
     private enum Race {
@@ -61,7 +61,7 @@ class OptionalAssertionsTest {
         public Race getRace() {
             return race;
         }
-        
+
         public String getName() {
             return name;
         }

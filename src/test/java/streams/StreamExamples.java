@@ -1,20 +1,23 @@
 package streams;
 
 import static java.util.function.Function.identity;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class StreamExamples {
 
-    public static final String[] WINKLERS = {"Andre", "Christine", "Adam", "Lars", "Erwin"};
+    public static final String[] WINKLERS = { "Andre", "Christine", "Adam", "Lars", "Erwin" };
 
     @DisplayName("Example: Filter stream of optionals.")
     @Tag("streams")
@@ -125,10 +128,10 @@ public class StreamExamples {
     @Test
     void streamGroupingToMap() {
         List<Pair> pairs = List.of(
-            Pair.of("a", "1"),
-            Pair.of("a", "2"),
-            Pair.of("b", "3"),
-            Pair.of("b", "4"));
+                Pair.of("a", "1"),
+                Pair.of("a", "2"),
+                Pair.of("b", "3"),
+                Pair.of("b", "4"));
 
         Map<String, List<Pair>> x = pairs.stream().collect(Collectors.groupingBy(Pair::getKey));
         assertThat(x).hasSize(2);
@@ -147,13 +150,16 @@ public class StreamExamples {
         public static Pair of(String key, String value) {
             return new Pair(key, value);
         }
+
         private Pair(String key, String value) {
             this.key = key;
             this.value = value;
         }
+
         public String getKey() {
             return key;
         }
+
         public String getValue() {
             return value;
         }
@@ -178,7 +184,8 @@ public class StreamExamples {
     void parallelStream() {
         List<String> list = List.of("Andre", "Lars", "Adam", "Erwin", "Christine");
 
-        Map<Integer, List<String>> groupedByLength = list.parallelStream().collect(Collectors.groupingBy(String::length));
+        Map<Integer, List<String>> groupedByLength = list.parallelStream()
+                .collect(Collectors.groupingBy(String::length));
 
         assertThat(groupedByLength.get(4)).containsExactlyInAnyOrder("Lars", "Adam");
         assertThat(groupedByLength.get(5)).containsExactlyInAnyOrder("Andre", "Erwin");

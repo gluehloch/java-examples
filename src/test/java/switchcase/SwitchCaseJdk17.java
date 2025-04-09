@@ -13,7 +13,7 @@ class SwitchCaseJdk17 {
         assertThat(testString("Java 16")).isEqualTo("Ok"); // Ok
         assertThat(testString("Java 11")).isEqualTo("LTS"); // LTS
         assertThat(testString("")).isEqualTo("Ok"); // Ok
-        assertThat(testString(null)).isEqualTo("Unkown"); // Unknown!        
+        assertThat(testString(null)).isEqualTo("Unkown"); // Unknown!
     }
 
     static String formatter(Object o) {
@@ -92,8 +92,8 @@ class SwitchCaseJdk17 {
     static void testTriangle2(Shape s) {
         switch (s) {
             case null -> System.out.println("NULL-String");
-            //case Triangle t && (t.calculateArea() > 100) ->
-            //        System.out.println("Large triangle");
+            // case Triangle t && (t.calculateArea() > 100) ->
+            // System.out.println("Large triangle");
             case Triangle t -> System.out.println("Triangle: " + t);
             default -> System.out.println("Unknown!");
         }

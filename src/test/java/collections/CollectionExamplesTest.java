@@ -1,7 +1,6 @@
 package collections;
 
 import static java.util.Map.entry;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.tuple;
@@ -22,7 +21,7 @@ import org.junit.jupiter.api.Test;
  * Some new Java 9 / 10 features.
  * 
  * @author Andre Winkler
- * @since  2018/2021
+ * @since 2018/2021
  */
 class CollectionExamplesTest {
 

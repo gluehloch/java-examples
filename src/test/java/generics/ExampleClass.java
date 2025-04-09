@@ -9,10 +9,10 @@ package generics;
  */
 public class ExampleClass implements ExampleInterface<ExampleClass> {
 
-	@Override
-	public ExampleClass self() {
-		return this;
-	}
+    @Override
+    public ExampleClass self() {
+        return this;
+    }
 
     @Override
     public int compareTo(ExampleClass t) {

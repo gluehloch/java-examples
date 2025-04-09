@@ -1,6 +1,5 @@
 package de.awtools.jdk;
 
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -14,9 +13,9 @@ public class IncorrectWarningDemo {
 
     public static void main(String... args) {
         try (FileChannel fc = FileChannel.open(Path.of("bla"));
-            //@SuppressWarnings("unused") // shouldn't need this
-            // SuppressWarnings does not turn of -Xlint warning
-            FileLock flck = fc.lock()) { // or tryLock() ...
+                // @SuppressWarnings("unused") // shouldn't need this
+                // SuppressWarnings does not turn of -Xlint warning
+                FileLock flck = fc.lock()) { // or tryLock() ...
             try (FileLock fileLock = fc.lock()) {
                 fc.size();
             }

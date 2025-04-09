@@ -13,7 +13,7 @@ class OptionalAssertionsTest {
         var optional = Optional.of("Andre Winkler");
         assertThat(optional)
                 .isPresent()
-                .hasValueSatisfying( o -> {
+                .hasValueSatisfying(o -> {
                     assertThat(o).isEqualTo("Andre Winkler");
                 });
     }

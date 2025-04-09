@@ -21,19 +21,20 @@ public class CopyCollection {
         List<String> strings = List.of("Andre", "Christine", "Adam", "Lars", "Erwin");
         List<String> copy = new ArrayList<>(strings);
         assertThat(copy).containsExactlyElementsOf(strings);
-        
+
         // Achtung: Arrays.asList liefert nicht den generischen Typen zurzueck.
-        List<Object> strings2 = Arrays.asList(new String[] {"Andre", "Christine", "Adam", "Lars", "Erwin"});
+        List<Object> strings2 = Arrays.asList(new String[] { "Andre", "Christine", "Adam", "Lars", "Erwin" });
         assertThat(strings2).hasSize(strings2.size());
 
-        List<Object> destination = Arrays.asList(new String[] {"1", "2", "3", "4", "5", "6"});
-        // Achtung: Erstellt keine Kopie wie im oberen Beispiel. Das Element "6" wird in der 
+        List<Object> destination = Arrays.asList(new String[] { "1", "2", "3", "4", "5", "6" });
+        // Achtung: Erstellt keine Kopie wie im oberen Beispiel. Das Element "6" wird in
+        // der
         // 'destination' bei behalten.
         Collections.copy(destination, strings2);
-        
+
         assertThat(destination).hasSize(6);
         assertThat(destination).containsExactly("Andre", "Christine", "Adam", "Lars", "Erwin", "6");
-        
+
         List<String> strings3 = strings.stream().collect(Collectors.toList());
         assertThat(strings3).containsExactlyElementsOf(strings3);
     }
