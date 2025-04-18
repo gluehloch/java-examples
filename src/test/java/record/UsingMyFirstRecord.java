@@ -15,6 +15,10 @@ class UsingMyFirstRecord {
 
         RecordDefinedOnClassLevel rdcl = new RecordDefinedOnClassLevel("1", "Name", "Message");
         assertThat(rdcl.toMessage()).isEqualTo("message=[1, Name, Message]");
+
+        MyFirstRecord record2 = new MyFirstRecord("Andre", null);
+        assertThat(record2.firstName()).isEqualTo("Andre");
+        assertThat(record2.name()).isNull();
     }
 
 }
