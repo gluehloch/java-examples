@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class StreamExamples {
+public class StreamExamplesTest {
 
     public static final String[] WINKLERS = { "Andre", "Christine", "Adam", "Lars", "Erwin" };
 
