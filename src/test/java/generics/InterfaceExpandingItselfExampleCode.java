@@ -33,7 +33,7 @@ public class InterfaceExpandingItselfExampleCode {
         InterfaceExpandingItself<?> aObjectB = aObjectA.getSomeClass().getSomeClass();
     }
 
-    public class AnotherClass implements InterfaceExpandingItself<AnotherClass> {
+    public static class AnotherClass implements InterfaceExpandingItself<AnotherClass> {
         @Override
         public InterfaceExpandingItself<AnotherClass> getSomeClass() {
             return this;
@@ -50,7 +50,7 @@ public class InterfaceExpandingItselfExampleCode {
         }
     }
 
-    public class AndAnotherClass implements InterfaceExpandingItself<AndAnotherClass> {
+    public static class AndAnotherClass implements InterfaceExpandingItself<AndAnotherClass> {
         @Override
         public AndAnotherClass getSomeClass() {
             return this;
@@ -67,7 +67,7 @@ public class InterfaceExpandingItselfExampleCode {
         }
     }
 
-    public class AnotherAnotherClass implements InterfaceExpandingItself<AnotherAnotherClass> {
+    public static class AnotherAnotherClass implements InterfaceExpandingItself<AnotherAnotherClass> {
         @Override
         public AnotherAnotherClass getSomeClass() {
             return this;
@@ -84,7 +84,7 @@ public class InterfaceExpandingItselfExampleCode {
         }
     }
 
-    public class XxxClass implements InterfaceExpandingItself<AnotherClass> {
+    public static class XxxClass implements InterfaceExpandingItself<AnotherClass> {
         @Override
         public InterfaceExpandingItself<AnotherClass> getSomeClass() {
             // TODO Auto-generated method stub
