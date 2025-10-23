@@ -150,4 +150,52 @@ class CollectionExamplesTest {
         var integers3 = integers.stream().filter(integers2::contains).toList();
         assertThat(integers2).containsExactlyElementsOf(integers3);
     }
+
+    @Tag("collections")
+    @Test
+    void removeAllElementsWhichArePartOfAnotherCollection() {
+        var integers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        var integers2 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        integers.removeAll(integers2);
+        assertThat(integers).containsExactly(10);
+    }
+
+    @Tag("collections")
+    @Test
+    void removeAllElementsWhichArePartOfAnotherCollection2() {
+        var persons = new ArrayList<>(List.of(
+                new Person("Andre", 54),
+                new Person("Adam", 19),
+                new Person("Lars", 17),
+                new Person("Erwin", 14)));
+        var personsToRemove = List.of("Adam", "Lars", "Erwin");
+
+        // remove all persons whose name is contained in personsToRemove
+        persons.removeIf(p -> personsToRemove.contains(p.name()));
+
+        assertThat(persons).hasSize(1);
+        assertThat(persons.get(0).name()).isEqualTo("Andre");
+    }
+
+    @Tag("collections")
+    @Test
+    void removeAllElementsWhichArePartOfAnotherCollection3() {
+        var persons = List.of("Adam", "Lars", "Erwin");
+        var personsToRemove = new ArrayList<>(List.of(
+                new Person("Andre", 54),
+                new Person("Adam", 19),
+                new Person("Lars", 17),
+                new Person("Erwin", 14)));
+
+        // remove all strings from 'persons' if a Person with the same name exists in personsToRemove
+        var remaining = new ArrayList<>(persons);
+        remaining.removeIf(name -> personsToRemove.stream().anyMatch(p -> p.name().equals(name)));
+
+        assertThat(remaining).isEmpty();
+    }
+
+    private static record Person(String name, int age) {
+    }
+
 }
