@@ -21,4 +21,14 @@
       <jdkHome>C:/development/devtools/jdk/jdk-17</jdkHome>
     </configuration>
   </toolchain>
+  <toolchain>
+    <type>jdk</type>
+    <provides>
+      <version>25</version>
+      <vendor>openjdk</vendor>
+    </provides>
+    <configuration>
+      <jdkHome>C:/development/devtools/jdk/jdk-25</jdkHome>
+    </configuration>
+  </toolchain>  
 </toolchains>

@@ -2,7 +2,7 @@ package switchcase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SwitchCaseJdk17 {
+class SwitchCase {
 
     void switchCaseTestJdk17() {
         var text = "";
@@ -60,13 +60,13 @@ class SwitchCaseJdk17 {
         }
     }
 
-    class Shape {
+    sealed interface Shape permits Rectangle, Triangle {
     }
 
-    class Rectangle extends Shape {
+    final class Rectangle implements Shape {
     }
 
-    class Triangle extends Shape {
+    final class Triangle implements Shape {
         int calculateArea() {
             return 1;
         }
@@ -88,13 +88,11 @@ class SwitchCaseJdk17 {
         }
     }
 
-    // TODO Preview feature. Currently disabled.
     static void testTriangle2(Shape s) {
         switch (s) {
             case null -> System.out.println("NULL-String");
-            // case Triangle t && (t.calculateArea() > 100) ->
-            // System.out.println("Large triangle");
-            case Triangle t -> System.out.println("Triangle: " + t);
+            case Triangle t -> System.out.println("Large triangle " + t);
+            case Rectangle t -> System.out.println("Rectangle: " + t);
             default -> System.out.println("Unknown!");
         }
     }
