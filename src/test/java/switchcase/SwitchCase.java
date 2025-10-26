@@ -92,7 +92,7 @@ class SwitchCase {
         switch (s) {
             case null -> System.out.println("NULL-String");
             case Triangle t -> System.out.println("Large triangle " + t);
-            case Rectangle t -> System.out.println("Triangle: " + t);
+            case Rectangle t -> System.out.println("Rectangle: " + t);
             default -> System.out.println("Unknown!");
         }
     }
